@@ -1,4 +1,4 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -183,11 +183,18 @@ p{
 </style>
 </head>
 <body>
-
+<div class="container" >
+ <!-- <h1>WELCOME</h1> -->
+    <p  style="margin-bottom: 40%;" > ॐ श्री गणेशाय नमः </p>
+    <img src="{% static 'g.jpeg' %}" style="height: 500px; margin-bottom: 10%;">
+</div>
 <!-- Anime Characters -->
-<img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png" class="anime anime1">
-<img src="https://cdn-icons-png.flaticon.com/512/4140/4140051.png" class="anime anime2">
-<img src="https://cdn-icons-png.flaticon.com/512/4140/4140037.png" class="anime anime3">
+<img src="{% static 'g.jpeg' %}" class="anime anime1">
+<img src="{% static 'g.jpeg' %}" class="anime anime2">
+<!--  -->
+
+
+
 
 <!-- Particles -->
 <div class="particle p1"></div>
@@ -195,10 +202,7 @@ p{
 <div class="particle p3"></div>
 <div class="particle p4"></div>
 
-<div class="container">
-    <h1>WELCOME</h1>
-    <p>🚀 Welcome To Gautamsih World 🚀</p>
-</div>
+
 
 </body>
 </html>
