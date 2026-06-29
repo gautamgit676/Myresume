@@ -1,3 +1,4 @@
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +16,7 @@
 }
 
 body{
-    height:100vh;
+    min-height:100vh;
     overflow:hidden;
     display:flex;
     justify-content:center;
@@ -23,53 +24,33 @@ body{
     background:linear-gradient(-45deg,#0f172a,#1e3a8a,#6d28d9,#2563eb);
     background-size:400% 400%;
     animation:bgMove 12s ease infinite;
+    padding:20px;
 }
 
 .container{
     text-align:center;
     z-index:10;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:20px;
 }
 
-h1{
+.container p{
     color:white;
-    font-size:5rem;
-    text-transform:uppercase;
-    letter-spacing:5px;
-    animation:glow 2s ease-in-out infinite alternate;
+    font-size:2rem;
+    font-weight:bold;
+    text-shadow:0 0 10px rgba(255,255,255,0.5);
 }
 
-p{
-    color:white;
-    font-size:1.7rem;
-    margin-top:15px;
-    animation:fadeIn 3s forwards;
-}
-
-/* Anime Images */
-.anime{
-    position:absolute;
-    width:220px;
-    animation:float 5s ease-in-out infinite;
-    filter:drop-shadow(0 0 20px rgba(255,255,255,0.4));
-}
-
-.anime1{
-    top:5%;
-    left:3%;
-}
-
-.anime2{
-    top:10%;
-    right:3%;
-    animation-delay:1s;
-}
-
-.anime3{
-    bottom:0;
-    left:50%;
-    transform:translateX(-50%);
-    width:280px;
-    animation-delay:2s;
+.main-image{
+    width:100%;
+    max-width:450px;
+    height:auto;
+    border-radius:20px;
+    box-shadow:0 0 25px rgba(255,255,255,0.3);
+    animation:float 4s ease-in-out infinite;
 }
 
 /* Floating particles */
@@ -113,38 +94,12 @@ p{
     100%{background-position:0% 50%;}
 }
 
-@keyframes glow{
-    from{
-        text-shadow:
-        0 0 10px #00e5ff,
-        0 0 20px #00e5ff,
-        0 0 40px #00e5ff;
-    }
-    to{
-        text-shadow:
-        0 0 20px #ff00ff,
-        0 0 40px #ff00ff,
-        0 0 80px #ff00ff;
-    }
-}
-
-@keyframes fadeIn{
-    from{
-        opacity:0;
-        transform:translateY(30px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
 @keyframes float{
     0%,100%{
         transform:translateY(0);
     }
     50%{
-        transform:translateY(-25px);
+        transform:translateY(-15px);
     }
 }
 
@@ -162,47 +117,49 @@ p{
     }
 }
 
-@media(max-width:768px){
+/* Tablet */
+@media (max-width:768px){
 
-    h1{
-        font-size:2.8rem;
+    .container p{
+        font-size:1.5rem;
     }
 
-    p{
+    .main-image{
+        max-width:300px;
+    }
+}
+
+/* Mobile */
+@media (max-width:480px){
+
+    .container p{
         font-size:1.2rem;
     }
 
-    .anime{
-        width:120px;
+    .main-image{
+        max-width:220px;
     }
 
-    .anime3{
-        width:180px;
+    body{
+        padding:10px;
     }
 }
 </style>
 </head>
 <body>
-<div class="container" >
- <!-- <h1>WELCOME</h1> -->
-    <p  style="margin-bottom: 40%;" > ॐ श्री गणेशाय नमः </p>
-    <img src="{% static 'g.jpeg' %}" style="height: 500px; margin-bottom: 10%;">
+
+<div class="container">
+    <p>ॐ श्री गणेशाय नमः</p>
+
+    <img src="{% static 'g.jpeg' %}"
+         alt="Ganesh"
+         class="main-image">
 </div>
-<!-- Anime Characters -->
-<img src="{% static 'g.jpeg' %}" class="anime anime1">
-<img src="{% static 'g.jpeg' %}" class="anime anime2">
-<!--  -->
 
-
-
-
-<!-- Particles -->
 <div class="particle p1"></div>
 <div class="particle p2"></div>
 <div class="particle p3"></div>
 <div class="particle p4"></div>
-
-
 
 </body>
 </html>
