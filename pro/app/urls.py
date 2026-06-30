@@ -1,7 +1,9 @@
 from django.urls import path, include
 from app.views import *
 urlpatterns = [
-    path('',home, name='home'),
+   
+    path('home',home, name='home'),
+    path('',basedemo, name='demo'),
     path("pic", upload_photo, name="upload"),
 ]
 

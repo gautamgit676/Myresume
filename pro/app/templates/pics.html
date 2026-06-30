@@ -1,30 +1,16 @@
-{% load static %}
+{% extends "base.html" %}
 
-<!DOCTYPE html>
+<!-- {% block title %}
+Photo Gallery
+{% endblock %} -->
 
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Photo Gallery</title>
+{% block css %}
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
-}
-
-body{
-    background:linear-gradient(135deg,#0f172a,#1e3a8a,#6d28d9);
-    min-height:100vh;
-    padding:20px;
-}
-
 .container{
     max-width:1200px;
     margin:auto;
+    padding:30px 20px;
 }
 
 .heading{
@@ -33,36 +19,20 @@ body{
     margin-bottom:30px;
 }
 
-.heading h1{
-    font-size:3rem;
-    margin-bottom:10px;
-}
-
-.heading p{
-    opacity:0.8;
-}
-
-/* Upload Form */
 .form-card{
-    background:rgba(255,255,255,0.1);
-    backdrop-filter:blur(10px);
+    background:rgba(255,255,255,.1);
     padding:25px;
     border-radius:20px;
     margin-bottom:40px;
-    box-shadow:0 5px 20px rgba(0,0,0,0.3);
-}
-
-.form-group{
-    margin-bottom:15px;
 }
 
 input[type="text"],
 input[type="file"]{
     width:100%;
     padding:12px;
+    margin-bottom:15px;
     border:none;
     border-radius:10px;
-    outline:none;
 }
 
 button{
@@ -72,16 +42,9 @@ button{
     border-radius:10px;
     background:#22c55e;
     color:white;
-    font-size:16px;
     cursor:pointer;
-    transition:0.3s;
 }
 
-button:hover{
-    transform:translateY(-2px);
-}
-
-/* Gallery */
 .gallery{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
@@ -92,19 +55,12 @@ button:hover{
     background:white;
     border-radius:18px;
     overflow:hidden;
-    box-shadow:0 5px 15px rgba(0,0,0,0.2);
-    transition:0.3s;
-}
-
-.card:hover{
-    transform:translateY(-8px);
 }
 
 .card img{
     width:100%;
     height:280px;
     object-fit:cover;
-    display:block;
 }
 
 .card-content{
@@ -112,54 +68,15 @@ button:hover{
     text-align:center;
 }
 
-.card-content h3{
-    color:#333;
-    font-size:1.1rem;
-}
-
 .empty{
     color:white;
     text-align:center;
-    font-size:1.2rem;
-    grid-column:1/-1;
-    margin-top:20px;
-}
-
-/* Tablet */
-@media(max-width:768px){
-
-    .heading h1{
-        font-size:2.2rem;
-    }
-
-    .card img{
-        height:250px;
-    }
-}
-
-/* Mobile */
-@media(max-width:480px){
-
-    body{
-        padding:10px;
-    }
-
-    .heading h1{
-        font-size:1.8rem;
-    }
-
-    .gallery{
-        grid-template-columns:1fr;
-    }
-
-    .card img{
-        height:220px;
-    }
 }
 </style>
 
-</head>
-<body>
+{% endblock %}
+
+{% block content %}
 
 <div class="container">
 
@@ -173,19 +90,15 @@ button:hover{
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
-        <div class="form-group">
-            <input type="text"
-                   name="title"
-                   placeholder="Enter Photo Title"
-                   required>
-        </div>
+        <input type="text"
+               name="title"
+               placeholder="Enter Photo Title"
+               required>
 
-        <div class="form-group">
-            <input type="file"
-                   name="image"
-                   accept="image/*"
-                   required>
-        </div>
+        <input type="file"
+               name="image"
+               accept="image/*"
+               required>
 
         <button type="submit">
             Upload Photo
@@ -213,8 +126,5 @@ button:hover{
 
 </div>
 
-</body>
-</html>
-
-
+{% endblock %}
 
