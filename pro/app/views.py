@@ -23,6 +23,6 @@ def upload_photo(request):
 
         return redirect("upload")
 
-    photos = Photo.objects.values()
+    photos = Photo.objects.all()
 
     return render(request,"pics.html", {"photos": photos})

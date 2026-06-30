@@ -1,5 +1,7 @@
 {% load static %}
+
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -11,13 +13,13 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial,sans-serif;
+    font-family:Arial, sans-serif;
 }
 
 body{
-    min-height:100vh;
     background:linear-gradient(135deg,#0f172a,#1e3a8a,#6d28d9);
-    padding:30px;
+    min-height:100vh;
+    padding:20px;
 }
 
 .container{
@@ -27,7 +29,7 @@ body{
 
 .heading{
     text-align:center;
-    color:#fff;
+    color:white;
     margin-bottom:30px;
 }
 
@@ -40,13 +42,14 @@ body{
     opacity:0.8;
 }
 
+/* Upload Form */
 .form-card{
     background:rgba(255,255,255,0.1);
     backdrop-filter:blur(10px);
     padding:25px;
     border-radius:20px;
     margin-bottom:40px;
-    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+    box-shadow:0 5px 20px rgba(0,0,0,0.3);
 }
 
 .form-group{
@@ -78,17 +81,18 @@ button:hover{
     transform:translateY(-2px);
 }
 
+/* Gallery */
 .gallery{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
     gap:25px;
 }
 
 .card{
     background:white;
-    border-radius:20px;
+    border-radius:18px;
     overflow:hidden;
-    box-shadow:0 8px 20px rgba(0,0,0,0.2);
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
     transition:0.3s;
 }
 
@@ -98,8 +102,9 @@ button:hover{
 
 .card img{
     width:100%;
-    height:250px;
+    height:280px;
     object-fit:cover;
+    display:block;
 }
 
 .card-content{
@@ -109,78 +114,107 @@ button:hover{
 
 .card-content h3{
     color:#333;
+    font-size:1.1rem;
 }
 
 .empty{
-    text-align:center;
     color:white;
+    text-align:center;
     font-size:1.2rem;
-    margin-top:30px;
+    grid-column:1/-1;
+    margin-top:20px;
 }
 
+/* Tablet */
 @media(max-width:768px){
+
     .heading h1{
-        font-size:2rem;
+        font-size:2.2rem;
     }
 
+    .card img{
+        height:250px;
+    }
+}
+
+/* Mobile */
+@media(max-width:480px){
+
     body{
-        padding:15px;
+        padding:10px;
+    }
+
+    .heading h1{
+        font-size:1.8rem;
+    }
+
+    .gallery{
+        grid-template-columns:1fr;
+    }
+
+    .card img{
+        height:220px;
     }
 }
 </style>
+
 </head>
 <body>
 
 <div class="container">
 
-    <div class="heading">
-        <h4>📸 Made By Gautamsinh</h4>
-        <h1>📸 Photo Gallery</h1>
-        <p>Upload and view beautiful memories</p>
-    </div>
+```
+<div class="heading">
+    <h1>📸 Photo Gallery</h1>
+    <p>Upload and View Your Photos</p>
+</div>
 
-    <div class="form-card">
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
+<div class="form-card">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
 
-            <div class="form-group">
-                <input type="text"
-                       name="title"
-                       placeholder="Enter Photo Title"
-                       required>
-            </div>
-
-            <div class="form-group">
-                <input type="file"
-                       name="image"
-                       accept="image/*"
-                       required>
-            </div>
-
-            <button type="submit">
-                Upload Photo
-            </button>
-        </form>
-    </div>
-
-    <div class="gallery">
-
-        {% for photo in photos %}
-        <div class="card">
-            <img src="{{ photo.image.url }}" alt="{{ photo.title }}">
-            <div class="card-content">
-                <h3>{{ photo.title }}</h3>
-            </div>
+        <div class="form-group">
+            <input type="text"
+                   name="title"
+                   placeholder="Enter Photo Title"
+                   required>
         </div>
-        {% empty %}
-        <div class="empty">
-            No photos uploaded yet.
-        </div>
-        {% endfor %}
 
+        <div class="form-group">
+            <input type="file"
+                   name="image"
+                   accept="image/*"
+                   required>
+        </div>
+
+        <button type="submit">
+            Upload Photo
+        </button>
+    </form>
+</div>
+
+<div class="gallery">
+
+    {% for photo in photos %}
+    <div class="card">
+        <img src="{{ photo.image.url }}" alt="{{ photo.title }}">
+        <div class="card-content">
+            <h3>{{ photo.title }}</h3>
+        </div>
     </div>
+    {% empty %}
+    <div class="empty">
+        No photos uploaded yet.
+    </div>
+    {% endfor %}
+
+</div>
+```
 
 </div>
 
 </body>
 </html>
+
+
+
