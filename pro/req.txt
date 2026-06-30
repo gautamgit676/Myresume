@@ -2,8 +2,10 @@ asgiref==3.11.1
 boto3==1.43.36
 botocore==1.43.36
 Django==5.2.15
+django-storages==1.14.6
 djangorestframework==3.17.1
 jmespath==1.1.0
+pillow==12.2.0
 psycopg2-binary==2.9.12
 python-dateutil==2.9.0.post0
 python-dotenv==1.2.2
