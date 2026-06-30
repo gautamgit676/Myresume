@@ -1,0 +1,186 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photo Gallery</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#0f172a,#1e3a8a,#6d28d9);
+    padding:30px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+.heading{
+    text-align:center;
+    color:#fff;
+    margin-bottom:30px;
+}
+
+.heading h1{
+    font-size:3rem;
+    margin-bottom:10px;
+}
+
+.heading p{
+    opacity:0.8;
+}
+
+.form-card{
+    background:rgba(255,255,255,0.1);
+    backdrop-filter:blur(10px);
+    padding:25px;
+    border-radius:20px;
+    margin-bottom:40px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+input[type="text"],
+input[type="file"]{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 8px 20px rgba(0,0,0,0.2);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+}
+
+.card-content{
+    padding:15px;
+    text-align:center;
+}
+
+.card-content h3{
+    color:#333;
+}
+
+.empty{
+    text-align:center;
+    color:white;
+    font-size:1.2rem;
+    margin-top:30px;
+}
+
+@media(max-width:768px){
+    .heading h1{
+        font-size:2rem;
+    }
+
+    body{
+        padding:15px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="heading">
+        <h4>📸 Made By Gautamsinh</h4>
+        <h1>📸 Photo Gallery</h1>
+        <p>Upload and view beautiful memories</p>
+    </div>
+
+    <div class="form-card">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <input type="text"
+                       name="title"
+                       placeholder="Enter Photo Title"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <input type="file"
+                       name="image"
+                       accept="image/*"
+                       required>
+            </div>
+
+            <button type="submit">
+                Upload Photo
+            </button>
+        </form>
+    </div>
+
+    <div class="gallery">
+
+        {% for photo in photos %}
+        <div class="card">
+            <img src="{{ photo.image.url }}" alt="{{ photo.title }}">
+            <div class="card-content">
+                <h3>{{ photo.title }}</h3>
+            </div>
+        </div>
+        {% empty %}
+        <div class="empty">
+            No photos uploaded yet.
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+</html>
