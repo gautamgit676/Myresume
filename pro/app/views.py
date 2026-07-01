@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.shortcuts import render, redirect
 from .models import Photo
 from django.contrib import messages
+from django.contrib.auth import logout
+
 
 # Create your views here.
 
@@ -12,6 +14,17 @@ def  home(request):
 
 def  basedemo(request):
     return render(request , 'base.html')
+
+
+def login(request):
+    return render(request , 'login.html')
+
+def signup(request):
+    return render(request , 'signup.html')
+
+def logout(request):
+    # logout(request)
+    return redirect('login')
 
 def upload_photo(request):
 
@@ -28,8 +41,6 @@ def upload_photo(request):
         if image.size > 5 * 1024 * 1024:
             messages.error(request, "Image must be under 5MB")
             return redirect("upload")
-
-        
 
         # ✅ Save safely
         Photo.objects.create(

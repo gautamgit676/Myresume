@@ -1,0 +1,385 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Sign Up
+{% endblock %}
+
+{% block css %}
+
+<style>
+
+.signup-page{
+    min-height:calc(100vh - 80px);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:30px;
+}
+
+/* Floating Photos */
+
+.photo{
+    position:absolute;
+
+    width:150px;
+    height:180px;
+
+    object-fit:cover;
+
+    border-radius:18px;
+
+    box-shadow:
+        0 15px 30px rgba(0,0,0,.4);
+
+    animation:float 6s ease-in-out infinite;
+
+    transition:.4s;
+}
+
+.photo:hover{
+    transform:scale(1.1);
+}
+
+.photo1{
+    top:10%;
+    left:5%;
+}
+
+.photo2{
+    top:12%;
+    right:5%;
+    animation-delay:1s;
+}
+
+.photo3{
+    bottom:10%;
+    left:8%;
+    animation-delay:2s;
+}
+
+.photo4{
+    bottom:10%;
+    right:8%;
+    animation-delay:3s;
+}
+
+/* Card */
+
+.card{
+    width:100%;
+    max-width:450px;
+
+    padding:40px;
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    box-shadow:
+        0 20px 40px rgba(0,0,0,.35);
+
+    text-align:center;
+
+    z-index:5;
+
+    animation:cardFloat 4s ease-in-out infinite;
+}
+
+/* Logo */
+
+.logo{
+    font-size:2.2rem;
+    font-weight:bold;
+
+    margin-bottom:10px;
+
+    background:linear-gradient(
+        90deg,
+        #facc15,
+        #fb7185,
+        #60a5fa,
+        #34d399
+    );
+
+    background-size:300% 300%;
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    animation:logoMove 4s linear infinite;
+}
+
+.subtitle{
+    color:#d1d5db;
+    margin-bottom:25px;
+}
+
+/* Inputs */
+
+.form-input{
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+    outline:none;
+
+    border-radius:12px;
+
+    margin-bottom:15px;
+
+    background:rgba(255,255,255,.12);
+
+    color:white;
+}
+
+.form-input::placeholder{
+    color:#d1d5db;
+}
+
+/* Button */
+
+.btn{
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    color:white;
+
+    font-size:16px;
+    font-weight:bold;
+
+    background:linear-gradient(
+        135deg,
+        #06b6d4,
+        #2563eb,
+        #7c3aed
+    );
+
+    background-size:300% 300%;
+
+    animation:btnMove 5s linear infinite;
+
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 10px 25px rgba(37,99,235,.5);
+}
+
+/* Login Link */
+
+.link{
+    margin-top:20px;
+    color:white;
+}
+
+.link a{
+    color:#facc15;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+/* Particles */
+
+.particle{
+    position:absolute;
+
+    width:8px;
+    height:8px;
+
+    border-radius:50%;
+
+    background:white;
+
+    opacity:.5;
+
+    animation:particleMove 8s linear infinite;
+}
+
+.p1{left:10%;}
+.p2{left:30%;}
+.p3{left:50%;}
+.p4{left:70%;}
+.p5{left:90%;}
+
+/* Animations */
+
+@keyframes float{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-20px);
+    }
+}
+
+@keyframes logoMove{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    100%{
+        background-position:100% 50%;
+    }
+}
+
+@keyframes btnMove{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    100%{
+        background-position:100% 50%;
+    }
+}
+
+@keyframes cardFloat{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-10px);
+    }
+}
+
+@keyframes particleMove{
+
+    from{
+        top:100%;
+        opacity:0;
+    }
+
+    to{
+        top:-10%;
+        opacity:1;
+    }
+}
+
+@media(max-width:768px){
+
+    .photo{
+        width:90px;
+        height:120px;
+    }
+
+    .card{
+        padding:25px;
+    }
+
+    .logo{
+        font-size:1.7rem;
+    }
+}
+
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="signup-page">
+
+```
+<img src="{% static 'a.jpeg' %}" class="photo photo1" alt="">
+<img src="{% static 'b.jpeg' %}" class="photo photo2" alt="">
+<img src="{% static 'c.jpeg' %}" class="photo photo3" alt="">
+<img src="{% static 'd.jpeg' %}" class="photo photo4" alt="">
+
+<div class="card">
+
+    <div class="logo">
+        📸 Join Gautamsinh Gallery
+    </div>
+
+    <p class="subtitle">
+        Create your account and start sharing memories
+    </p>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <input
+            type="text"
+            name="username"
+            class="form-input"
+            placeholder="Username"
+            required
+        >
+
+        <input
+            type="email"
+            name="email"
+            class="form-input"
+            placeholder="Email Address"
+            required
+        >
+
+        <input
+            type="password"
+            name="password1"
+            class="form-input"
+            placeholder="Password"
+            required
+        >
+
+        <input
+            type="password"
+            name="password2"
+            class="form-input"
+            placeholder="Confirm Password"
+            required
+        >
+
+        <button type="submit" class="btn">
+            Create Account 🚀
+        </button>
+
+    </form>
+
+    <div class="link">
+        Already have an account?
+        <a href="{% url 'login' %}">
+            Login
+        </a>
+    </div>
+
+</div>
+
+<div class="particle p1"></div>
+<div class="particle p2"></div>
+<div class="particle p3"></div>
+<div class="particle p4"></div>
+<div class="particle p5"></div>
+```
+
+</div>
+
+{% endblock %}

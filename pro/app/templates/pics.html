@@ -89,7 +89,7 @@ button{
 
     {% if messages %}
     {% for message in messages %}
-    <p style="color: red; text-align: center;">{{ message }}</p>
+    <p style="color: rgb(67, 180, 61); text-align: center;" id="message">{{ message }}</p>
     {% endfor %}
     {% endif %}
 </div>
@@ -139,6 +139,13 @@ document.querySelector("form").addEventListener("submit", function(e) {
         e.preventDefault();
     }
 });
+
+setTimeout(function() {
+    const msg = document.getElementById("message");
+    if (msg) {
+        msg.style.display = "none";
+    }
+}, 3000); // 3 seconds
 </script>
 {% endblock %}
 

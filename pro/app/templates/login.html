@@ -1,0 +1,250 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block css %}
+
+<style>
+
+.login-page{
+    min-height:calc(100vh - 80px);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    position:relative;
+
+    padding:30px;
+
+    overflow:hidden;
+}
+
+/* Floating Photos */
+
+.photo{
+    position:absolute;
+
+    width:140px;
+    height:180px;
+
+    object-fit:cover;
+
+    border-radius:15px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+
+    animation:float 6s ease-in-out infinite;
+}
+
+.photo1{
+    top:10%;
+    left:5%;
+}
+
+.photo2{
+    top:12%;
+    right:5%;
+    animation-delay:1s;
+}
+
+.photo3{
+    bottom:10%;
+    left:10%;
+    animation-delay:2s;
+}
+
+.photo4{
+    bottom:10%;
+    right:10%;
+    animation-delay:3s;
+}
+
+/* Card */
+
+.card{
+    width:100%;
+    max-width:420px;
+
+    padding:35px;
+
+    border-radius:25px;
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(15px);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.3);
+
+    text-align:center;
+
+    z-index:5;
+}
+
+.logo{
+    color:white;
+    font-size:2rem;
+    font-weight:bold;
+
+    margin-bottom:10px;
+}
+
+.subtitle{
+    color:#d1d5db;
+    margin-bottom:25px;
+}
+
+.form-input{
+    width:100%;
+
+    padding:14px;
+
+    margin-bottom:15px;
+
+    border:none;
+    outline:none;
+
+    border-radius:12px;
+
+    background:rgba(255,255,255,.12);
+
+    color:white;
+}
+
+.form-input::placeholder{
+    color:#d1d5db;
+}
+
+.btn{
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    color:white;
+
+    font-weight:bold;
+
+    background:linear-gradient(
+        135deg,
+        #06b6d4,
+        #2563eb
+    );
+
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+}
+
+.link{
+    margin-top:18px;
+    color:white;
+}
+
+.link a{
+    color:#facc15;
+    text-decoration:none;
+}
+
+@keyframes float{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-20px);
+    }
+}
+
+@media(max-width:768px){
+
+    .photo{
+        width:90px;
+        height:120px;
+    }
+
+    .photo1,
+    .photo2{
+        top:5%;
+    }
+
+    .card{
+        max-width:350px;
+    }
+}
+
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="login-page">
+
+```
+<img src="{% static 'a.jpeg' %}" class="photo photo1">
+<img src="{% static 'b.jpeg' %}" class="photo photo2">
+<img src="{% static 'c.jpeg' %}" class="photo photo3">
+<img src="{% static 'd.jpeg' %}" class="photo photo4">
+
+<div class="card">
+
+    <div class="logo">
+        📸 Gautamsinh Gallery
+    </div>
+
+    <p class="subtitle">
+        Save and Share Your Memories
+    </p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <input
+            type="text"
+            name="username"
+            class="form-input"
+            placeholder="Username"
+            required
+        >
+
+        <input
+            type="password"
+            name="password"
+            class="form-input"
+            placeholder="Password"
+            required
+        >
+
+        <button type="submit" class="btn">
+            Login
+        </button>
+    </form>
+
+    <div class="link">
+        Don't have an account?
+        <a href="{% url 'signup' %}">
+            Sign Up
+        </a>
+    </div>
+
+</div>
+```
+
+</div>
+
+{% endblock %}

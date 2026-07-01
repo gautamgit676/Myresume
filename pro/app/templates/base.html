@@ -272,7 +272,7 @@ body{
 
 ```
 <div class="logo">
-     📸 Gautamsinh Photo Gallery  📸
+      Gautamsinh Photo Gallery  
 </div>
 
 <div class="nav-menu">
@@ -283,6 +283,21 @@ body{
     <a href="{% url 'upload' %}" class="nav-btn">
         📸 Add Photos
     </a>
+
+    {% if user.is_authenticated %}
+    <a href="{% url 'logout' %}" class="nav-btn">
+        🚪 Logout
+    </a>
+{% else %}
+    <a href="{% url 'login' %}" class="nav-btn">
+        🔑 Login
+    </a>
+{% endif %}
+
+    <a href="{% url 'signup' %}" class="nav-btn">
+        📝 Sign Up
+    </a>
+
 </div>
 ```
 
@@ -292,7 +307,7 @@ body{
 
 <div class="container">
 
-```
+
 <p>ॐ श्री गणेशाय नमः</p>
 
 <img
@@ -300,7 +315,7 @@ body{
     alt="Ganesh"
     class="main-image"
 >
-```
+
 
 </div>
 
