@@ -102,10 +102,7 @@ button{
                placeholder="Enter Photo Title"
                required>
 
-        <input type="file"
-               name="image"
-               accept="image/*"
-               required>
+        <input type="file" id="image" name="image" accept="image/*" required>
 
         <button type="submit">
             Upload Photo
@@ -133,5 +130,15 @@ button{
 
 </div>
 
+<script>
+document.querySelector("form").addEventListener("submit", function(e) {
+    const file = document.getElementById("image").files[0];
+
+    if (file && file.size > 5 * 1024 * 1024) {
+        alert("Image must be smaller than 5 MB");
+        e.preventDefault();
+    }
+});
+</script>
 {% endblock %}
 
