@@ -85,7 +85,14 @@ button{
     <h1>📸 Photo Gallery</h1>
     <p>Upload and View Your Photos</p>
 </div>
+<div >
 
+    {% if messages %}
+    {% for message in messages %}
+    <p style="color: red; text-align: center;">{{ message }}</p>
+    {% endfor %}
+    {% endif %}
+</div>
 <div class="form-card">
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
