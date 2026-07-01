@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-e^vnc(sac3^$r$k+ek_&t=2%5_&r=i-vmgqhy&jak_mrca@vy5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["gautamsinh.duckdns.org","127.0.0.1","localhost",]
 
 
 # Application definition
@@ -112,6 +112,10 @@ STORAGES = {
     },
 }
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://gautamsinh.duckdns.org",
+]
+
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
@@ -129,7 +133,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
