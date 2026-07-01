@@ -3,8 +3,9 @@ from django.shortcuts import render, redirect
 from .models import Photo
 from django.contrib import messages
 from django.contrib.auth import logout
-
-
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -16,21 +17,64 @@ def  basedemo(request):
     return render(request , 'base.html')
 
 
-def login(request):
-    return render(request , 'login.html')
+def loginuser(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        user = authenticate(
+            request,
+            username=username,
+            password=password
+        )
+
+        if user is not None:
+            login(request, user)
+            return redirect("home")
+        else:
+            messages.error(request, "Invalid username or password")
+
+    return render(request, "login.html")
+
 
 def signup(request):
-    return render(request , 'signup.html')
+    if request.method == "POST":
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+       
+        print(username,email,password)
 
-def logout(request):
-    # logout(request)
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Username already exists")
+            return redirect("signup")
+
+        if User.objects.filter(email=email).exists():
+            messages.error(request, "Email already exists")
+            return redirect("signup")
+
+        User.objects.create_user(username=username,email=email,password=password)
+
+        messages.success(request, "Account created successfully. Please login.")
+        return redirect("login")
+
+    return render(request, "signup.html")
+
+
+
+def logoutuser(request):
+    logout(request)
     return redirect('login')
 
+
+
+@login_required(login_url='login')
 def upload_photo(request):
 
     if request.method == "POST":
         title = request.POST.get("title")
         image = request.FILES.get("image")
+        user = request.user  # Get the currently logged-in user
 
         # ❌ 1. Check empty upload
         if not image:
@@ -45,12 +89,13 @@ def upload_photo(request):
         # ✅ Save safely
         Photo.objects.create(
             title=title,
-            image=image
+            image=image,
+            user=user
         )
 
         messages.success(request, "Photo uploaded successfully!")
         return redirect("upload")
 
-    photos = Photo.objects.all()
+    photos = Photo.objects.filter(user=request.user).order_by("-id")  # Show latest first
     return render(request, "pics.html", {"photos": photos})
 
