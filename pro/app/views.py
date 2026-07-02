@@ -6,6 +6,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from app.task import send_welcome_email
 # Create your views here.
 
 
@@ -53,8 +54,8 @@ def signup(request):
             messages.error(request, "Email already exists")
             return redirect("signup")
 
-        User.objects.create_user(username=username,email=email,password=password)
-
+        user = User.objects.create_user(username=username,email=email,password=password)
+        send_welcome_email.delay(user.email, user.username)
         messages.success(request, "Account created successfully. Please login.")
         return redirect("login")
 
