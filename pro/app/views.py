@@ -17,6 +17,9 @@ def  home(request):
 def  basedemo(request):
     return render(request , 'base.html')
 
+def myresume(request):
+    return render(request , 'resume.html')
+
 
 def loginuser(request):
     if request.method == "POST":
