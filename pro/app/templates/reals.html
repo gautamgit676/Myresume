@@ -1,241 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Camera Upload Demo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera Upload Demo</title>
 
-<style>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f4f4f4;
+            margin: 40px;
+        }
 
-body{
-    font-family:Arial,sans-serif;
-    text-align:center;
-    background:#f4f4f4;
-    margin:40px;
-}
+        form {
+            background: white;
+            width: 500px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+        }
 
-form{
-    background:white;
-    width:500px;
-    margin:auto;
-    padding:20px;
-    border-radius:10px;
-    box-shadow:0 0 10px rgba(0,0,0,.2);
-}
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+        }
 
-input{
-    width:90%;
-    padding:10px;
-    margin:10px 0;
-}
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+        }
 
-button{
-    padding:10px 20px;
-    margin:10px;
-    cursor:pointer;
-}
+        video {
+            display: none;
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
 
-video{
-    display:none;
-    width:100%;
-    margin-top:20px;
-    border-radius:10px;
-}
-
-img{
-    display:none;
-    width:100%;
-    margin-top:20px;
-    border-radius:10px;
-}
-
-</style>
+        img {
+            display: none;
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+    </style>
 
 </head>
 
 <body>
 
 
-<br><br>
-<h2>Upload Photo or Take Photo</h2>
+    <br><br>
+    <h2>Upload Photo or Take Photo</h2>
 
-<form method="POST" enctype="multipart/form-data">
+    
 
-    <!-- Django -->
-    <!-- {% csrf_token %} -->
 
-    <input
-        type="text"
-        name="title"
-        placeholder="Photo Title"
-        required>
-
-    <br>
-
-    <input
-        type="file"
-        id="image"
-        name="image"
-        accept="image/*">
-
-    <br>
-
-    <button type="button" id="openCamera">
-    📷 Open Camera
-</button>
-
-<button type="button" id="switchCamera" style="display:none;">
-    🔄 
-</button>
-
-<button type="button" id="capture" style="display:none;">
-    📸 Capture
-</button>
-
-    <button
-        type="button"
-        id="capture"
-        style="display:none;">
-
-        Capture
-
-    </button>
-
-    <video
-        id="video"
-        autoplay
-        playsinline>
-    </video>
-
-    <canvas
-        id="canvas"
-        style="display:none;">
-    </canvas>
-
-    <img
-        id="preview">
-
-    <br>
-
-    <button
-        type="submit">
-
-        Upload
-
-    </button>
-
-</form>
-
-<script>
-const video = document.getElementById("video");
-const canvas = document.getElementById("canvas");
-const preview = document.getElementById("preview");
-
-const openBtn = document.getElementById("openCamera");
-const switchBtn = document.getElementById("switchCamera");
-const captureBtn = document.getElementById("capture");
-const imageInput = document.getElementById("image");
-
-let stream = null;
-
-// Start with back camera
-let facingMode = "environment";
-
-async function startCamera(){
-
-    try{
-
-        if(stream){
-
-            stream.getTracks().forEach(track=>track.stop());
-
-        }
-
-        stream = await navigator.mediaDevices.getUserMedia({
-
-            video:{
-                facingMode:facingMode
-            }
-
-        });
-
-        video.srcObject = stream;
-
-        video.style.display = "block";
-
-        captureBtn.style.display = "inline-block";
-
-        switchBtn.style.display = "inline-block";
-
-    }
-
-    catch(err){
-
-        alert(err.message);
-
-        console.log(err);
-
-    }
-
-}
-
-openBtn.onclick = startCamera;
-
-
-// Switch Camera
-switchBtn.onclick = async function(){
-
-    if(facingMode==="environment"){
-
-        facingMode="user";
-
-    }else{
-
-        facingMode="environment";
-
-    }
-
-    startCamera();
-
-};
-
-
-// Capture
-captureBtn.onclick=function(){
-
-    canvas.width = video.videoWidth;
-
-    canvas.height = video.videoHeight;
-
-    const ctx = canvas.getContext("2d");
-
-    ctx.drawImage(video,0,0);
-
-    canvas.toBlob(function(blob){
-
-        const file = new File(
-            [blob],
-            "camera.png",
-            {
-                type:"image/png"
-            }
-        );
-
-        const dt = new DataTransfer();
-
-        dt.items.add(file);
-
-        imageInput.files = dt.files;
-
-        preview.src = URL.createObjectURL(blob);
-
-        preview.style.display = "block";
-
-    });
-
-};
-
-</script>
 
 </body>
+
 </html>

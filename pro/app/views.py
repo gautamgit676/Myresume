@@ -42,6 +42,8 @@ def clickphoto(request):
     return render(request,"reals.html",{ "photos":photos})
     # return render(request , 'reals.html')
 
+
+
 def loginuser(request):
     if request.method == "POST":
         username = request.POST.get("username")
