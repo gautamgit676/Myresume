@@ -54,11 +54,17 @@ img{
 </head>
 
 <body>
-<label>Select Camera:</label>
+<button type="button" id="openCamera">
+    📷 Open Camera
+</button>
 
-<select id="cameraSelect">
-    <option value="">Loading cameras...</option>
-</select>
+<button type="button" id="switchCamera" style="display:none;">
+    🔄 Switch Camera
+</button>
+
+<button type="button" id="capture" style="display:none;">
+    📸 Capture
+</button>
 
 <br><br>
 <h2>Upload Photo or Take Photo</h2>
@@ -127,77 +133,34 @@ img{
 </form>
 
 <script>
-
 const video = document.getElementById("video");
 const canvas = document.getElementById("canvas");
 const preview = document.getElementById("preview");
 
 const openBtn = document.getElementById("openCamera");
+const switchBtn = document.getElementById("switchCamera");
 const captureBtn = document.getElementById("capture");
-
 const imageInput = document.getElementById("image");
-
-const cameraSelect = document.getElementById("cameraSelect");
 
 let stream = null;
 
+// Start with back camera
+let facingMode = "environment";
 
-// Load Cameras
-async function loadCameras(){
-
-    try{
-
-        const devices = await navigator.mediaDevices.enumerateDevices();
-
-        const cameras = devices.filter(device => device.kind === "videoinput");
-
-        cameraSelect.innerHTML = "";
-
-        cameras.forEach((camera,index)=>{
-
-            const option = document.createElement("option");
-
-            option.value = camera.deviceId;
-
-            option.text =
-                camera.label || `Camera ${index+1}`;
-
-            cameraSelect.appendChild(option);
-
-        });
-
-    }
-
-    catch(err){
-
-        console.log(err);
-
-    }
-
-}
-
-
-// Open Camera
 async function startCamera(){
 
-    if(stream){
-
-        stream.getTracks().forEach(track=>track.stop());
-
-    }
-
     try{
+
+        if(stream){
+
+            stream.getTracks().forEach(track=>track.stop());
+
+        }
 
         stream = await navigator.mediaDevices.getUserMedia({
 
             video:{
-
-                deviceId:{
-
-                    exact:cameraSelect.value
-
-                }
-
+                facingMode:facingMode
             }
 
         });
@@ -208,34 +171,43 @@ async function startCamera(){
 
         captureBtn.style.display = "inline-block";
 
+        switchBtn.style.display = "inline-block";
+
     }
 
     catch(err){
 
         alert(err.message);
 
+        console.log(err);
+
     }
 
 }
 
-
-openBtn.addEventListener("click",startCamera);
+openBtn.onclick = startCamera;
 
 
 // Switch Camera
-cameraSelect.addEventListener("change",()=>{
+switchBtn.onclick = async function(){
 
-    if(cameraSelect.value){
+    if(facingMode==="environment"){
 
-        startCamera();
+        facingMode="user";
+
+    }else{
+
+        facingMode="environment";
 
     }
 
-});
+    startCamera();
+
+};
 
 
-// Capture Photo
-captureBtn.addEventListener("click",()=>{
+// Capture
+captureBtn.onclick=function(){
 
     canvas.width = video.videoWidth;
 
@@ -243,34 +215,16 @@ captureBtn.addEventListener("click",()=>{
 
     const ctx = canvas.getContext("2d");
 
-    ctx.drawImage(
-
-        video,
-
-        0,
-
-        0,
-
-        canvas.width,
-
-        canvas.height
-
-    );
+    ctx.drawImage(video,0,0);
 
     canvas.toBlob(function(blob){
 
         const file = new File(
-
             [blob],
-
             "camera.png",
-
             {
-
                 type:"image/png"
-
             }
-
         );
 
         const dt = new DataTransfer();
@@ -283,32 +237,9 @@ captureBtn.addEventListener("click",()=>{
 
         preview.style.display = "block";
 
-    },"image/png");
+    });
 
-
-    if(stream){
-
-        stream.getTracks().forEach(track=>track.stop());
-
-    }
-
-    video.style.display="none";
-
-    captureBtn.style.display="none";
-
-});
-
-
-// Ask permission first then load cameras
-navigator.mediaDevices.getUserMedia({video:true})
-
-.then(function(tempStream){
-
-    tempStream.getTracks().forEach(track=>track.stop());
-
-    loadCameras();
-
-});
+};
 
 </script>
 
