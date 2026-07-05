@@ -9,6 +9,7 @@ urlpatterns = [
     path("signup", signup, name="signup"),
     path("logout", logoutuser, name="logout"),
     path("resume", myresume, name="resume"),
+    path("clickphoto", clickphoto, name="clickphoto"),
     
 ]
 

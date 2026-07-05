@@ -20,6 +20,27 @@ def  basedemo(request):
 def myresume(request):
     return render(request , 'resume.html')
 
+def clickphoto(request):
+    if request.method=="POST":
+
+        title=request.POST.get("title")
+
+        image=request.FILES.get("image")
+
+        Photo.objects.create(
+
+            title=title,
+
+            image=image
+
+        )
+
+        return redirect("clickphoto")
+
+    photos=Photo.objects.all()
+
+    return render(request,"reals.html",{ "photos":photos})
+    # return render(request , 'reals.html')
 
 def loginuser(request):
     if request.method == "POST":
