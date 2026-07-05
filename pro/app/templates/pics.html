@@ -1,80 +1,8 @@
 {% extends "base.html" %}
 
-<!-- {% block title %}
-Photo Gallery
-{% endblock %} -->
-
 {% block css %}
 
-<style>
-.container{
-    max-width:1200px;
-    margin:auto;
-    padding:30px 20px;
-}
 
-.heading{
-    text-align:center;
-    color:white;
-    margin-bottom:30px;
-}
-
-.form-card{
-    background:rgba(255,255,255,.1);
-    padding:25px;
-    border-radius:20px;
-    margin-bottom:40px;
-}
-
-input[type="text"],
-input[type="file"]{
-    width:100%;
-    padding:12px;
-    margin-bottom:15px;
-    border:none;
-    border-radius:10px;
-}
-
-button{
-    width:100%;
-    padding:14px;
-    border:none;
-    border-radius:10px;
-    background:#22c55e;
-    color:white;
-    cursor:pointer;
-}
-
-.gallery{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:25px;
-}
-
-.card{
-    background:white;
-    border-radius:18px;
-    overflow:hidden;
-}
-
-
-
-.card img
-{ width:500px;
-     height:500px;
-  
-     }
-
-.card-content{
-    padding:15px;
-    text-align:center;
-}
-
-.empty{
-    color:white;
-    text-align:center;
-}
-</style>
 
 {% endblock %}
 
@@ -82,72 +10,90 @@ button{
 
 <div class="container">
 
-```
-<div class="heading">
-    <h1>📸 Photo Gallery</h1>
-    <p>Upload and View Your Photos</p>
-</div>
-<div >
+    <div class="heading">
+        <h1>📸 Photo Gallery</h1>
+        <p>Upload and View Your Photos</p>
+    </div>
 
-    {% if messages %}
-    {% for message in messages %}
-    <p style="color: rgb(67, 180, 61); text-align: center;" id="message">{{ message }}</p>
-    {% endfor %}
-    {% endif %}
-</div>
-<div class="form-card">
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
+    <!-- <div>
 
-        <input type="text"
-               name="title"
-               placeholder="Enter Photo Title"
-               required>
+        {% if messages %}
 
-        <input type="file" id="image" name="image" accept="image/*" required>
+        {% for message in messages %}
 
-        <button type="submit">
-            Upload Photo
-        </button>
-    </form>
-</div>
+        <p class="message">{{ message }}</p>
 
-<div class="gallery">
+        {% endfor %}
 
-    {% for photo in photos %}
-    <div class="card">
-        <img src="{{ photo.image.url }}" alt="{{ photo.title }}">
-        <div class="card-content">
-            <h3>{{ photo.title }}</h3>
+        {% endif %}
+
+    </div> -->
+
+    <div class="form-card">
+
+        <form method="POST" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <input type="text" name="title" placeholder="Enter Photo Title" required>
+
+            <input type="file" id="image" name="image" accept="image/*" required>
+
+            <button type="submit">
+
+                Upload Photo
+
+            </button>
+
+        </form>
+
+    </div>
+
+    <div class="gallery">
+
+        {% for photo in photos %}
+
+        <div class="card">
+
+            <img src="{{ photo.image.url }}" alt="{{ photo.title }}"
+                onclick="openImage('{{ photo.image.url }}','{{ photo.title }}')">
+
+            <div class="card-content">
+
+                <h3>{{ photo.title }}</h3>
+
+            </div>
+
         </div>
+
+        {% empty %}
+
+        <div class="empty">
+
+            No photos uploaded yet.
+
+        </div>
+
+        {% endfor %}
+
     </div>
-    {% empty %}
-    <div class="empty">
-        No photos uploaded yet.
+
+    <!-- Image Modal -->
+
+    <div id="imageModal" class="modal">
+
+        <span class="close" onclick="closeImage()">
+
+            &times;
+
+        </span>
+
+        <img id="modalImage" class="modal-content">
+
+        <div id="caption"></div>
+
     </div>
-    {% endfor %}
 
 </div>
-```
 
-</div>
-
-<script>
-document.querySelector("form").addEventListener("submit", function(e) {
-    const file = document.getElementById("image").files[0];
-
-    if (file && file.size > 5 * 1024 * 1024) {
-        alert("Image must be smaller than 5 MB");
-        e.preventDefault();
-    }
-});
-
-setTimeout(function() {
-    const msg = document.getElementById("message");
-    if (msg) {
-        msg.style.display = "none";
-    }
-}, 3000); // 3 seconds
-</script>
 {% endblock %}
-

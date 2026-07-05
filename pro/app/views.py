@@ -58,8 +58,8 @@ def signup(request):
             return redirect("signup")
 
         user = User.objects.create_user(username=username,email=email,password=password)
-        send_welcome_email.delay(user.email, user.username)
         messages.success(request, "Account created successfully. Please login.")
+        send_welcome_email.delay(user.email, user.username)
         return redirect("login")
 
     return render(request, "signup.html")
