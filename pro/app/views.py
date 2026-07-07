@@ -7,10 +7,14 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from app.task import send_welcome_email
+from django_ratelimit.decorators import ratelimit
+
+
 # Create your views here.
 
 
-
+# @ratelimit(key='ip', rate='10/h', method='GET', block=True)# if need for custome spasific cache use this 
+# @ratelimit(key='ip', rate='10/h', method='POST', block=True)# if need for custome spasific cache use this 
 def  home(request):
     return render(request , 'home.html')
 
@@ -69,8 +73,6 @@ def signup(request):
         username = request.POST.get("username")
         email = request.POST.get("email")
         password = request.POST.get("password")
-       
-        print(username,email,password)
 
         if User.objects.filter(username=username).exists():
             messages.error(request, "Username already exists")

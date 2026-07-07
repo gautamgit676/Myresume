@@ -23,7 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-e^vnc(sac3^$r$k+ek_&t=2%5_&r=i-vmgqhy&jak_mrca@vy5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
 DEBUG = True
+
 
 ALLOWED_HOSTS = ["gautamsinh.duckdns.org","127.0.0.1","localhost",]
 
@@ -47,6 +49,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'app.middleware.RateLimitMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -133,6 +136,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
@@ -171,7 +175,12 @@ CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
 CELERY_BROKER_URL ='redis://127.0.0.1:6379/0'
 
-
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+    }
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
