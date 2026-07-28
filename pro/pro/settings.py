@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-e^vnc(sac3^$r$k+ek_&t=2%5_&r=i-vmgqhy&jak_mrca@vy5
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = True
+DEBUG = False
 
 
 ALLOWED_HOSTS = ["gautamsinh.duckdns.org","127.0.0.1","localhost",]
