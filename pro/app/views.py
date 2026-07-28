@@ -12,7 +12,8 @@ from django_ratelimit.decorators import ratelimit
 
 # Create your views here.
 
-
+def custom_404(request, exception):
+    return render(request, '404.html', status=404)
 # @ratelimit(key='ip', rate='10/h', method='GET', block=True)# if need for custome spasific cache use this 
 # @ratelimit(key='ip', rate='10/h', method='POST', block=True)# if need for custome spasific cache use this 
 def  home(request):
