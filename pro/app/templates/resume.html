@@ -1,300 +1,2052 @@
-{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gautam Makwana | Python/AI Backend Developer</title>
 
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Gautam Makwana | Python Backend & AI Developer</title>
 
-   
+    <meta
+        name="description"
+        content="Gautam Makwana - Python Backend & AI Developer specializing in Django, FastAPI, Flask, RAG, LangChain, Gemini, AWS and scalable backend systems."
+    >
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #070b14;
+            color: #e6edf7;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* =========================
+           BACKGROUND
+        ========================= */
+
+        .background {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            overflow: hidden;
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(0, 255, 200, 0.08),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 80% 30%,
+                    rgba(100, 80, 255, 0.10),
+                    transparent 30%
+                ),
+                #070b14;
+        }
+
+        .grid {
+            position: absolute;
+            inset: 0;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                );
+
+            background-size: 50px 50px;
+
+            mask-image: linear-gradient(
+                to bottom,
+                black,
+                transparent
+            );
+        }
+
+        .orb {
+            position: absolute;
+            width: 350px;
+            height: 350px;
+
+            border-radius: 50%;
+
+            filter: blur(100px);
+
+            opacity: 0.18;
+
+            animation: float 10s ease-in-out infinite;
+        }
+
+        .orb.one {
+            background: #00ffd5;
+            top: 10%;
+            left: -100px;
+        }
+
+        .orb.two {
+            background: #6c5ce7;
+            right: -100px;
+            top: 40%;
+            animation-delay: 3s;
+        }
+
+        @keyframes float {
+
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-60px);
+            }
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+
+            z-index: 100;
+
+            padding: 18px 7%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: rgba(7, 11, 20, 0.75);
+
+            backdrop-filter: blur(15px);
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.06);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #00ffd5;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #aeb8c9;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #00ffd5;
+        }
+
+        .menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           COMMON
+        ========================= */
+
+        section {
+            padding: 100px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title span {
+            color: #00ffd5;
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .section-title h2 {
+            font-size: 40px;
+            margin-top: 10px;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+
+            padding:
+                120px 7%
+                80px;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .hero-tag {
+            display: inline-block;
+
+            padding: 8px 16px;
+
+            border:
+                1px solid
+                rgba(0,255,213,0.25);
+
+            border-radius: 30px;
+
+            color: #00ffd5;
+
+            font-size: 13px;
+
+            margin-bottom: 25px;
+
+            background:
+                rgba(0,255,213,0.05);
+        }
+
+        .hero h1 {
+            font-size: clamp(
+                50px,
+                8vw,
+                100px
+            );
+
+            line-height: 0.95;
+
+            letter-spacing: -4px;
+
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #00ffd5;
+        }
+
+        .hero h2 {
+            font-size: clamp(
+                22px,
+                4vw,
+                42px
+            );
+
+            color: #aeb8c9;
+
+            margin-bottom: 25px;
+        }
+
+        .typing {
+            color: #00ffd5;
+        }
+
+        .hero p {
+            max-width: 700px;
+
+            color: #929caf;
+
+            font-size: 17px;
+
+            line-height: 1.8;
+
+            margin-bottom: 35px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 25px;
+
+            border-radius: 8px;
+
+            font-weight: 700;
+
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #00ffd5;
+            color: #071016;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 15px 40px
+                rgba(0,255,213,0.2);
+        }
+
+        .btn-secondary {
+            border:
+                1px solid
+                rgba(255,255,255,0.15);
+
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            border-color: #00ffd5;
+            color: #00ffd5;
+        }
+
+
+        /* =========================
+           ABOUT
+        ========================= */
+
+        .about-container {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 60px;
+
+            align-items: center;
+        }
+
+        .about-text p {
+
+            color: #9da7b8;
+
+            line-height: 1.9;
+
+            margin-bottom: 20px;
+
+            font-size: 16px;
+        }
+
+        .about-card {
+
+            padding: 35px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            background:
+                rgba(255,255,255,0.025);
+
+            border-radius: 20px;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .about-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 150px;
+            height: 150px;
+
+            background: #00ffd5;
+
+            filter: blur(100px);
+
+            opacity: 0.15;
+
+            top: -50px;
+            right: -50px;
+        }
+
+        .stat-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2,1fr);
+
+            gap: 20px;
+        }
+
+        .stat {
+
+            padding: 25px;
+
+            border-radius: 15px;
+
+            background:
+                rgba(255,255,255,0.035);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.07);
+        }
+
+        .stat h3 {
+
+            font-size: 32px;
+
+            color: #00ffd5;
+
+            margin-bottom: 8px;
+        }
+
+        .stat p {
+
+            color: #8d98aa;
+        }
+
+
+        /* =========================
+           SKILLS
+        ========================= */
+
+        .skill-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit,minmax(250px,1fr));
+
+            gap: 20px;
+        }
+
+        .skill-card {
+
+            padding: 30px;
+
+            border-radius: 18px;
+
+            background:
+                rgba(255,255,255,0.025);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.07);
+
+            transition: 0.4s;
+        }
+
+        .skill-card:hover {
+
+            transform: translateY(-8px);
+
+            border-color:
+                rgba(0,255,213,0.4);
+
+            box-shadow:
+                0 20px 60px
+                rgba(0,0,0,0.3);
+        }
+
+        .skill-card h3 {
+
+            color: #00ffd5;
+
+            margin-bottom: 20px;
+        }
+
+        .tags {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+        }
+
+        .tag {
+
+            padding: 8px 12px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(0,255,213,0.07);
+
+            border:
+                1px solid
+                rgba(0,255,213,0.12);
+
+            color: #b8c2d2;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           EXPERIENCE
+        ========================= */
+
+        .timeline {
+
+            max-width: 950px;
+
+            margin: auto;
+
+            position: relative;
+        }
+
+        .timeline::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 20px;
+
+            top: 0;
+
+            bottom: 0;
+
+            width: 2px;
+
+            background:
+                linear-gradient(
+                    #00ffd5,
+                    transparent
+                );
+        }
+
+        .experience {
+
+            position: relative;
+
+            padding-left: 70px;
+
+            margin-bottom: 60px;
+        }
+
+        .dot {
+
+            position: absolute;
+
+            left: 10px;
+
+            top: 5px;
+
+            width: 22px;
+
+            height: 22px;
+
+            border-radius: 50%;
+
+            background: #00ffd5;
+
+            box-shadow:
+                0 0 25px
+                rgba(0,255,213,0.8);
+        }
+
+        .experience-header {
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            gap: 20px;
+
+            flex-wrap: wrap;
+
+            margin-bottom: 20px;
+        }
+
+        .experience h3 {
+
+            font-size: 27px;
+        }
+
+        .experience h4 {
+
+            color: #00ffd5;
+
+            margin-top: 7px;
+        }
+
+        .date {
+
+            color: #8791a3;
+
+            font-size: 14px;
+        }
+
+        .experience-description {
+
+            color: #929caf;
+
+            line-height: 1.8;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* =========================
+           PROJECTS
+        ========================= */
+
+        .project-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2,1fr);
+
+            gap: 30px;
+        }
+
+        .project-card {
+
+            padding: 35px;
+
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.045),
+                    rgba(255,255,255,0.015)
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            transition: 0.4s;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+
+            transform:
+                translateY(-10px);
+
+            border-color:
+                rgba(0,255,213,0.4);
+
+            box-shadow:
+                0 25px 70px
+                rgba(0,0,0,0.4);
+        }
+
+        .project-number {
+
+            font-size: 60px;
+
+            font-weight: 900;
+
+            color:
+                rgba(0,255,213,0.08);
+
+            position: absolute;
+
+            right: 20px;
+
+            top: 10px;
+        }
+
+        .project-card h3 {
+
+            font-size: 25px;
+
+            margin-bottom: 18px;
+
+            max-width: 80%;
+        }
+
+        .project-card p {
+
+            color: #929caf;
+
+            line-height: 1.8;
+
+            margin-bottom: 25px;
+        }
+
+        .project-tech {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+        }
+
+        .tech {
+
+            font-size: 12px;
+
+            padding: 7px 10px;
+
+            border-radius: 5px;
+
+            background:
+                rgba(108,92,231,0.12);
+
+            color: #c8c2ff;
+        }
+
+
+        /* =========================
+           EDUCATION
+        ========================= */
+
+        .education-grid {
+
+            max-width: 850px;
+
+            margin: auto;
+
+            display: grid;
+
+            gap: 20px;
+        }
+
+        .education-card {
+
+            padding: 25px 30px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            border-radius: 15px;
+
+            background:
+                rgba(255,255,255,0.025);
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            gap: 20px;
+
+            flex-wrap: wrap;
+        }
+
+        .education-card h3 {
+
+            margin-bottom: 8px;
+        }
+
+        .education-card p {
+
+            color: #8f99aa;
+        }
+
+        .education-date {
+
+            color: #00ffd5;
+        }
+
+
+        /* =========================
+           CONTACT
+        ========================= */
+
+        .contact {
+
+            text-align: center;
+
+            max-width: 800px;
+
+            margin: auto;
+        }
+
+        .contact h2 {
+
+            font-size: 50px;
+
+            margin-bottom: 20px;
+        }
+
+        .contact p {
+
+            color: #929caf;
+
+            line-height: 1.8;
+
+            margin-bottom: 30px;
+        }
+
+        .contact-info {
+
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 15px;
+
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+
+            padding: 12px 18px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.1);
+
+            border-radius: 8px;
+
+            color: #b9c2d1;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            text-align: center;
+
+            padding: 30px;
+
+            color: #687386;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.06);
+        }
+
+
+        /* =========================
+           ANIMATION
+        ========================= */
+
+        .reveal {
+
+            opacity: 0;
+
+            transform:
+                translateY(40px);
+
+            transition:
+                0.8s ease;
+        }
+
+        .reveal.active {
+
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media(max-width: 800px) {
+
+            .nav-links {
+
+                display: none;
+
+                position: absolute;
+
+                top: 65px;
+
+                left: 0;
+
+                width: 100%;
+
+                background: #080c15;
+
+                flex-direction: column;
+
+                padding: 25px;
+            }
+
+            .nav-links.active {
+
+                display: flex;
+            }
+
+            .menu-btn {
+
+                display: block;
+            }
+
+            .about-container {
+
+                grid-template-columns: 1fr;
+            }
+
+            .project-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+
+                letter-spacing: -2px;
+            }
+
+            .section-title h2 {
+
+                font-size: 32px;
+            }
+
+            .contact h2 {
+
+                font-size: 38px;
+            }
+        }
+
+    </style>
 </head>
+
 
 <body>
 
-<!-- ================= NAVBAR ================= -->
+
+<div class="background">
+
+    <div class="grid"></div>
+
+    <div class="orb one"></div>
+
+    <div class="orb two"></div>
+
+</div>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
 
 <nav>
 
     <div class="logo">
-        <h4>Python/AI Backend Developer</h4>
+        Gautam<span>.</span>
     </div>
 
-    <ul>
+    <ul class="nav-links">
 
-        <li><a href="#home">Home</a></li>
+        <li>
+            <a href="#home">Home</a>
+        </li>
 
-        <li><a href="#about">About</a></li>
+        <li>
+            <a href="#about">About</a>
+        </li>
 
-        <li><a href="#experience">Experience</a></li>
+        <li>
+            <a href="#skills">Skills</a>
+        </li>
 
-        <li><a href="#projects">Projects</a></li>
+        <li>
+            <a href="#experience">Experience</a>
+        </li>
 
-        <li><a href="#skills">Skills</a></li>
+        <li>
+            <a href="#projects">Projects</a>
+        </li>
 
-        <li><a href="#contact">Contact</a></li>
+        <li>
+            <a href="#contact">Contact</a>
+        </li>
 
     </ul>
 
+    <div class="menu-btn">
+        ☰
+    </div>
+
 </nav>
 
-<!-- ================= HERO ================= -->
 
-<section class="hero" id="home">
+<!-- =========================
+     HERO
+========================= -->
 
-<div class="hero-left">
+<section
+    class="hero"
+    id="home"
+>
 
-<h4>Hello, I'm</h4>
+    <div class="hero-content reveal">
 
-<h1>Gautam Makwana</h1>
+        <div class="hero-tag">
+            AVAILABLE FOR OPPORTUNITIES
+        </div>
 
-<h3>Python Backend Developer</h3>
+        <h1>
+            Gautam<br>
+            <span>Makwana.</span>
+        </h1>
 
-<p>
+        <h2>
+            I'm a
+            <span
+                class="typing"
+                id="typing"
+            ></span>
+        </h2>
 
-Python Backend Developer with experience building scalable web
-applications, REST APIs, AI-powered solutions and AWS cloud deployments.
+        <p>
+            Python Backend Developer with experience building
+            scalable web applications, REST APIs, and AI-powered
+            solutions using Django, FastAPI, Flask, and LangChain.
+            Experienced in developing RAG-based systems,
+            integrating LLMs, optimizing database performance,
+            and deploying production-ready applications.
+        </p>
 
-</p>           
+        <div class="hero-buttons">
 
-<div class="buttons">
+            <a
+                href="#projects"
+                class="btn btn-primary"
+            >
+                View My Work
+            </a>
 
-<a href="#projects" class="btn">View Projects</a>
+            <a
+                href="#contact"
+                class="btn btn-secondary"
+            >
+                Contact Me
+            </a>
 
+        </div>
 
-<a href="{% static '/Gautam_Python.pdf' %}"
-   download="Gautam__Python.pdf"
-   class="btn-outline">
-    Download Resume
-</a>
-</div>
-
-</div>
-
-<div class="hero-right">
-
-<img src="{% static 'Python.png' %}">
-
-</div>
+    </div>
 
 </section>
 
-<!-- ================= ABOUT ================= -->
+
+<!-- =========================
+     ABOUT
+========================= -->
 
 <section id="about">
 
-<h2>About Me</h2>
+    <div class="section-title reveal">
 
-<div class="about-card">
+        <span>ABOUT ME</span>
 
-<p>
+        <h2>
+            Building Backend & AI Systems
+        </h2>
 
-Python/AI Backend Developer specializing in Python, Django, FastAPI, Flask and AI solutions.
-Experienced in developing REST APIs, deploying applications on AWS,
-and building RAG systems using LangChain, Gemini, FAISS and Redis.
-
-</p>
-
-</div>
-
-</section>
-
-<!-- ================= EXPERIENCE ================= -->
-
-<section id="experience">
-
-<h2>Experience</h2>
-
-<div class="timeline">
-
-<div class="item">
-
-<h3>Python Developer</h3>
-
-<h4>Yudiz Pvt Ltd</h4>
-
-<p>Jan 2023 - Dec 2024</p>
-
-</div>
-
-<div class="item">
-
-<h3>Python Backend & AI Developer</h3>
-
-<h4>CereBulb</h4>
-
-<p>Jan 2025 - dec 2025</p>
-
-</div>
-
-<div class="item">
-
-<h3>Python Backend & AI Developer</h3>
-
-<h4>Freelance</h4>
-
-<p>Jan 2026 - Present</p>
-
-</div>
+    </div>
 
 
-</div>
+    <div class="about-container">
 
-</section>
+        <div class="about-text reveal">
 
-<!-- ================= PROJECTS ================= -->
+            <p>
+                I'm a Python Backend and AI Developer focused
+                on building scalable web applications, REST APIs,
+                and intelligent AI-powered solutions.
+            </p>
 
-<section id="projects">
+            <p>
+                My experience includes Django, Django REST Framework,
+                FastAPI, Flask, LangChain, RAG pipelines, Gemini API,
+                FAISS, Redis, PostgreSQL and AWS.
+            </p>
 
-<h2>Projects</h2>
+            <p>
+                I enjoy solving complex backend problems,
+                designing APIs, integrating AI systems,
+                and building production-ready applications.
+            </p>
 
-<div class="project-grid">
-
-<div class="card">
-<h3>Enterprise Knowledge Assistant(AI) - Conversational RAG
-Platform</h3>
-<p>
-Developed FastAPI APIs for chatbot and document management.
-Implemented a RAG pipeline using LangChain, Gemini embeddings,
-and FAISS for semantic search.
-• Used Redis for conversation memory and context retention.<br>
-Tech Stack: Python, FastAPI, LangChain, Gemini API, FAISS, Redis
-
-</p>
-</div>
-
-
-<div class="card">
-<h3>Powerhouse Management</h3>
-<p>
-Description: Developed a system to manage power supply operations
-and automate manual processes, enhancing efficiency and accuracy in
-monitoring and control.<br>
- Tech Stack:
-Backend: Python, Django, Django REST Framework, Pandas,
-Selenium
-Frontend: vue
-Database: PostgreSQL
-Tools: GitHub, Postman 
-</p>
-</div>
+        </div>
 
 
+        <div class="about-card reveal">
 
-<div class="card">
-<h3>Workpoint</h3>
-<p>
-Designed and implemented scalable RESTful APIs using Django
-REST Framework.
-Performed testing, debugging, and code optimization to improve
-application stability and performance.<br>
- Tech Stack: Backend: Python, Django, Django REST
-Framework
-</p>
-</div>
+            <div class="stat-grid">
 
+                <div class="stat">
 
-<div class="card">
-<h3> Web Scraping</h3>
-<p> 
-Description: Developed a Python-based web scraping tool to efficiently extract large-scale data from Swiggy, focusing on restaurant and hotel listings.
-Role: Utilized the BeautifulSoup (Bs4) library for data extraction and implemented multithreading to boost performance significantly. Achieved data collection of over 3,000 records within 10 seconds, demonstrating improved speed and efficiency.
-<br>Tech Stack:
-Languages & Libraries: Python, BeautifulSoup (Bs4), Threading, CSV</p>
+                    <h3>3+</h3>
 
-</div>
+                    <p>
+                        Years Experience
+                    </p>
+
+                </div>
 
 
+                <div class="stat">
+
+                    <h3>2</h3>
+
+                    <p>
+                        Companies
+                    </p>
+
+                </div>
 
 
-</div>
+                <div class="stat">
+
+                    <h3>2+</h3>
+
+                    <p>
+                        Major Projects
+                    </p>
+
+                </div>
 
 
+                <div class="stat">
+
+                    <h3>AI</h3>
+
+                    <p>
+                        RAG & LLM Systems
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
-<!-- ================= SKILLS ================= -->
+
+<!-- =========================
+     SKILLS
+========================= -->
 
 <section id="skills">
 
-<h2>Skills</h2>
+    <div class="section-title reveal">
 
-<div class="skills">
+        <span>TECH STACK</span>
 
-<span>Python</span>
+        <h2>
+            Skills & Technologies
+        </h2>
 
-<span>Django</span>
+    </div>
 
-<span>FastAPI</span>
 
-<span>Flask</span>
+    <div class="skill-grid">
 
-<span>DRF</span>
 
-<span>LangChain</span>
+        <div class="skill-card reveal">
 
-<span>RAG</span>
+            <h3>
+                Backend
+            </h3>
 
-<span>Gemini API</span>
+            <div class="tags">
 
-<span>Redis</span>
+                <span class="tag">
+                    Python
+                </span>
 
-<span>FAISS</span>
+                <span class="tag">
+                    Django
+                </span>
 
-<span>AWS</span>
+                <span class="tag">
+                    DRF
+                </span>
 
-<span>EC2</span>
+                <span class="tag">
+                    FastAPI
+                </span>
 
-<span>S3</span>
+                <span class="tag">
+                    Flask
+                </span>
 
-<span>RDS</span>
+            </div>
 
-<span>Lambda</span>
+        </div>
 
-<span>Git</span>
 
-<span>GitHub</span>
+        <div class="skill-card reveal">
 
-<span>PostgreSQL</span>
+            <h3>
+                AI & LLM
+            </h3>
 
-<span>MySQL</span>
+            <div class="tags">
 
-</div>
+                <span class="tag">
+                    LangChain
+                </span>
+
+                <span class="tag">
+                    RAG
+                </span>
+
+                <span class="tag">
+                    Gemini API
+                </span>
+
+                <span class="tag">
+                    FAISS
+                </span>
+
+                <span class="tag">
+                    Redis
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="skill-card reveal">
+
+            <h3>
+                Database
+            </h3>
+
+            <div class="tags">
+
+                <span class="tag">
+                    MySQL
+                </span>
+
+                <span class="tag">
+                    PostgreSQL
+                </span>
+
+                <span class="tag">
+                    SQLite
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="skill-card reveal">
+
+            <h3>
+                Cloud
+            </h3>
+
+            <div class="tags">
+
+                <span class="tag">
+                    AWS
+                </span>
+
+                <span class="tag">
+                    EC2
+                </span>
+
+                <span class="tag">
+                    S3
+                </span>
+
+                <span class="tag">
+                    RDS
+                </span>
+
+                <span class="tag">
+                    Lambda
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="skill-card reveal">
+
+            <h3>
+                Libraries
+            </h3>
+
+            <div class="tags">
+
+                <span class="tag">
+                    NumPy
+                </span>
+
+                <span class="tag">
+                    Pandas
+                </span>
+
+                <span class="tag">
+                    BeautifulSoup
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="skill-card reveal">
+
+            <h3>
+                Tools
+            </h3>
+
+            <div class="tags">
+
+                <span class="tag">
+                    Git
+                </span>
+
+                <span class="tag">
+                    GitHub
+                </span>
+
+                <span class="tag">
+                    Postman
+                </span>
+
+                <span class="tag">
+                    Trello
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
-<!-- ================= CONTACT ================= -->
+
+<!-- =========================
+     EXPERIENCE
+========================= -->
+
+<section id="experience">
+
+    <div class="section-title reveal">
+
+        <span>CAREER</span>
+
+        <h2>
+            Work Experience
+        </h2>
+
+    </div>
+
+
+    <div class="timeline">
+
+
+        <!-- CEREBULB -->
+
+        <div class="experience reveal">
+
+            <div class="dot"></div>
+
+            <div class="experience-header">
+
+                <div>
+
+                    <h3>
+                        Python Backend & AI Developer
+                    </h3>
+
+                    <h4>
+                        CereBulb
+                    </h4>
+
+                </div>
+
+                <div class="date">
+                    2025-Jan → Dec 2025
+                </div>
+
+            </div>
+
+            <p class="experience-description">
+
+                Improved proficiency in Python through practical
+                use of frameworks such as Django, Flask, FastAPI,
+                and relevant libraries.
+
+            </p>
+
+            <div class="project-card">
+
+                <div class="project-number">
+                    01
+                </div>
+
+                <h3>
+                    Powerhouse Management
+                </h3>
+
+                <p>
+
+                    Developed a system to manage power supply
+                    operations and automate manual processes,
+                    enhancing efficiency and accuracy in
+                    monitoring and control.
+
+                </p>
+
+                <p>
+
+                    Designed and implemented scalable RESTful APIs
+                    using Django REST Framework.
+
+                </p>
+
+                <p>
+
+                    Performed testing, debugging, and code
+                    optimization to improve application stability
+                    and performance.
+
+                </p>
+
+                <div class="project-tech">
+
+                    <span class="tech">Python</span>
+                    <span class="tech">Django</span>
+                    <span class="tech">DRF</span>
+                    <span class="tech">Pandas</span>
+                    <span class="tech">Selenium</span>
+                    <span class="tech">Vue</span>
+                    <span class="tech">PostgreSQL</span>
+                    <span class="tech">GitHub</span>
+                    <span class="tech">Postman</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- YUDIZ -->
+
+        <div class="experience reveal">
+
+            <div class="dot"></div>
+
+            <div class="experience-header">
+
+                <div>
+
+                    <h3>
+                        Python Developer
+                    </h3>
+
+                    <h4>
+                        Yudiz Private Ltd
+                    </h4>
+
+                </div>
+
+                <div class="date">
+                    2023-Jan → Dec 2024
+                </div>
+
+            </div>
+
+            <p class="experience-description">
+
+                Gained hands-on experience by contributing to
+                diverse web development and automation projects,
+                enhancing problem-solving and coding efficiency.
+
+            </p>
+
+
+            <div class="project-card">
+
+                <div class="project-number">
+                    02
+                </div>
+
+                <h3>
+                    Enterprise Knowledge Assistant
+                </h3>
+
+                <p>
+
+                    Developed FastAPI APIs for chatbot and document
+                    management.
+
+                </p>
+
+                <p>
+
+                    Implemented a RAG pipeline using LangChain,
+                    Gemini embeddings, and FAISS for semantic search.
+
+                </p>
+
+                <p>
+
+                    Used Redis for conversation memory and
+                    context retention.
+
+                </p>
+
+                <div class="project-tech">
+
+                    <span class="tech">Python</span>
+                    <span class="tech">FastAPI</span>
+                    <span class="tech">LangChain</span>
+                    <span class="tech">Gemini API</span>
+                    <span class="tech">FAISS</span>
+                    <span class="tech">Redis</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     PROJECTS
+========================= -->
+
+<section id="projects">
+
+    <div class="section-title reveal">
+
+        <span>MY WORK</span>
+
+        <h2>
+            Featured Projects
+        </h2>
+
+    </div>
+
+
+    <div class="project-grid">
+
+
+        <div class="project-card reveal">
+
+            <div class="project-number">
+                01
+            </div>
+
+            <h3>
+                Enterprise Knowledge Assistant
+            </h3>
+
+            <p>
+
+                An AI-powered conversational RAG platform
+                designed for intelligent document management
+                and semantic knowledge retrieval.
+
+            </p>
+
+            <div class="project-tech">
+
+                <span class="tech">
+                    FastAPI
+                </span>
+
+                <span class="tech">
+                    LangChain
+                </span>
+
+                <span class="tech">
+                    Gemini
+                </span>
+
+                <span class="tech">
+                    RAG
+                </span>
+
+                <span class="tech">
+                    FAISS
+                </span>
+
+                <span class="tech">
+                    Redis
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="project-card reveal">
+
+            <div class="project-number">
+                02
+            </div>
+
+            <h3>
+                Powerhouse Management
+            </h3>
+
+            <p>
+
+                A backend system designed to manage power supply
+                operations and automate manual processes,
+                improving monitoring, efficiency and accuracy.
+
+            </p>
+
+            <div class="project-tech">
+
+                <span class="tech">
+                    Python
+                </span>
+
+                <span class="tech">
+                    Django
+                </span>
+
+                <span class="tech">
+                    Django REST Framework
+                </span>
+
+                <span class="tech">
+                    PostgreSQL
+                </span>
+
+                <span class="tech">
+                    Pandas
+                </span>
+
+                <span class="tech">
+                    Selenium
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     EDUCATION
+========================= -->
+
+<section id="education">
+
+    <div class="section-title reveal">
+
+        <span>EDUCATION</span>
+
+        <h2>
+            Academic Background
+        </h2>
+
+    </div>
+
+
+    <div class="education-grid">
+
+
+        <div class="education-card reveal">
+
+            <div>
+
+                <h3>
+                    Master Of Computer Application
+                </h3>
+
+                <p>
+                    KSV University, Gandhinagar
+                </p>
+
+            </div>
+
+            <div class="education-date">
+                2020 - 2021
+            </div>
+
+        </div>
+
+
+        <div class="education-card reveal">
+
+            <div>
+
+                <h3>
+                    Bachelor of Computer Application
+                </h3>
+
+                <p>
+                    KSV University, Gandhinagar, Kadi
+                </p>
+
+            </div>
+
+            <div class="education-date">
+                2017 - 2019
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CONTACT
+========================= -->
 
 <section id="contact">
 
-<h2>Contact</h2>
+    <div class="contact reveal">
 
-<p>Email : gautamsinhresume@gmail.com</p>
+        <div class="section-title">
 
-<p>Phone : +91 8849415309</p>
+            <span>GET IN TOUCH</span>
+
+            <h2>
+                Let's Build Something Great
+            </h2>
+
+        </div>
+
+        <p>
+
+            I'm passionate about backend engineering,
+            AI systems, RAG applications, and building
+            scalable production-ready software.
+
+        </p>
+
+
+        <div class="contact-info">
+
+            <div class="contact-item">
+
+                📧
+                gautamsinhresume@gmail.com
+
+            </div>
+
+            <div class="contact-item">
+
+                📱
+                +91 8849415309
+
+            </div>
+
+            <div class="contact-item">
+
+                📍
+                Sanand, Ahmedabad
+
+            </div>
+
+        </div>
+
+
+        <a
+            href="mailto:gautamsinhresume@gmail.com"
+            class="btn btn-primary"
+        >
+            Send Me an Email
+        </a>
+
+    </div>
 
 </section>
 
+
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
 
-<p>
+    <p>
 
-© 2026 Gautam Makwana
+        ©
+        <span id="year"></span>
+        Gautam Makwana.
+        Built with Python, AI & Passion.
 
-</p>
+    </p>
 
 </footer>
 
-<script src="{% static 'js/script.js' %}"></script>
+
+<script>
+
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+const menuBtn =
+    document.querySelector(".menu-btn");
+
+const navLinks =
+    document.querySelector(".nav-links");
+
+
+menuBtn.addEventListener(
+    "click",
+    () => {
+
+        navLinks.classList.toggle(
+            "active"
+        );
+
+    }
+);
+
+
+/* =========================
+   TYPING ANIMATION
+========================= */
+
+const typingElement =
+    document.getElementById(
+        "typing"
+    );
+
+
+const words = [
+
+    "Python Backend Developer",
+
+    "AI Developer",
+
+    "RAG Engineer",
+
+    "FastAPI Developer",
+
+    "Django Developer"
+
+];
+
+
+let wordIndex = 0;
+
+let charIndex = 0;
+
+let deleting = false;
+
+
+function typeEffect() {
+
+    const currentWord =
+        words[wordIndex];
+
+
+    if (!deleting) {
+
+        typingElement.textContent =
+            currentWord.substring(
+                0,
+                charIndex + 1
+            );
+
+        charIndex++;
+
+        if (
+            charIndex ===
+            currentWord.length
+        ) {
+
+            deleting = true;
+
+            setTimeout(
+                typeEffect,
+                1500
+            );
+
+            return;
+        }
+
+    } else {
+
+        typingElement.textContent =
+            currentWord.substring(
+                0,
+                charIndex - 1
+            );
+
+        charIndex--;
+
+        if (charIndex === 0) {
+
+            deleting = false;
+
+            wordIndex =
+                (wordIndex + 1)
+                % words.length;
+
+        }
+
+    }
+
+
+    setTimeout(
+        typeEffect,
+        deleting
+            ? 50
+            : 100
+    );
+
+}
+
+
+typeEffect();
+
+
+/* =========================
+   SCROLL REVEAL
+========================= */
+
+const revealElements =
+    document.querySelectorAll(
+        ".reveal"
+    );
+
+
+function revealOnScroll() {
+
+    const windowHeight =
+        window.innerHeight;
+
+
+    revealElements.forEach(
+        element => {
+
+            const elementTop =
+                element.getBoundingClientRect()
+                .top;
+
+
+            if (
+                elementTop <
+                windowHeight - 100
+            ) {
+
+                element.classList.add(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+window.addEventListener(
+    "scroll",
+    revealOnScroll
+);
+
+
+revealOnScroll();
+
+
+/* =========================
+   CURRENT YEAR
+========================= */
+
+document.getElementById(
+    "year"
+).textContent =
+    new Date().getFullYear();
+
+
+/* =========================
+   CLOSE MOBILE MENU
+========================= */
+
+document
+    .querySelectorAll(
+        ".nav-links a"
+    )
+    .forEach(
+        link => {
+
+            link.addEventListener(
+                "click",
+                () => {
+
+                    navLinks.classList
+                        .remove(
+                            "active"
+                        );
+
+                }
+            );
+
+        }
+    );
+
+
+</script>
+
 
 </body>
 </html>
+
