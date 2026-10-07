@@ -70,7 +70,7 @@ def personal_training(request):
     return render(request,'PersonalTraining.html', {"seo": seo, "location": location})
 
 def pricing(request):
-    seo = get_seo("/pricing/")
+    seo = get_seo("/gym-fees-ahmedabad/")
     location = get_location()
     return render(request,'Pricing.html', {"seo": seo, "location": location})
 
