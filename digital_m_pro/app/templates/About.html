@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+ {{ seo.meta_title }}
+{% endblock %}
+
+{% block meta_description %}
+{{ seo.meta_description }}
+{% endblock %}
+
+
+{% block content %}
+
+<h1>About FitZone Gym</h1>
+
+<p>
+    FitZone Gym is a fitness center in Ahmedabad focused on
+    helping members build strength, improve fitness and maintain
+    a healthy lifestyle.
+</p>
+
+<h2>Our Fitness Environment</h2>
+
+<p>
+    Our gym provides a comfortable workout environment with
+    modern equipment and dedicated training areas.
+</p>
+
+<h2>Our Trainers</h2>
+
+<p>
+    Our trainers help members understand exercises, improve
+    workout techniques and stay consistent with their fitness goals.
+</p>
+
+<a href="{% url 'contact' %}">
+    Contact FitZone Gym
+</a>
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}
+ {{ seo.meta_title }}
+{% endblock %}
+
+{% block meta_description %}
+{{ seo.meta_description }}
+{% endblock %}
+
+
+{% block content %}
+
+<h1>Gym Membership Fees in Ahmedabad</h1>
+
+<p>
+    FitZone Gym offers flexible membership options for different
+    fitness goals and workout schedules.
+</p>
+
+<h2>Monthly Plan</h2>
+
+<p>
+    ₹1,500 per month
+</p>
+
+<h2>Quarterly Plan</h2>
+
+<p>
+    ₹4,000 for three months
+</p>
+
+<h2>Annual Plan</h2>
+
+<p>
+    ₹12,000 per year
+</p>
+
+<h2>Personal Training</h2>
+
+<p>
+    Personal training pricing depends on the training package
+    and number of sessions.
+</p>
+
+<a href="{% url 'membership' %}">
+    Explore Membership Plans
+</a>
+
+<a href="{% url 'personal-training' %}">
+    Explore Personal Training
+</a>
+
+{% endblock %}

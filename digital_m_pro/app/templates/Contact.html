@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}
+ {{ seo.meta_title }}
+{% endblock %}
+
+{% block meta_description %}
+{{ seo.meta_description }}
+{% endblock %}
+
+
+{% block content %}
+
+<h1>Contact FitZone Gym</h1>
+
+<p>
+    Have questions about membership, personal training or
+    our facilities? Contact the FitZone Gym team.
+</p>
+
+<h2>Phone</h2>
+
+<p>
+    +91 90000 00000
+</p>
+
+<h2>Email</h2>
+
+<p>
+    hello@fitzone.example
+</p>
+
+<h2>Visit Us</h2>
+
+<a href="{% url 'locations' %}">
+    View Our Location
+</a>
+
+{% endblock %}

@@ -1,0 +1,513 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+ {{ seo.meta_title }}
+{% endblock %}
+
+{% block meta_description %}
+{{ seo.meta_description }}
+{% endblock %}
+
+
+{% block content %}
+
+<!-- ================= HERO SECTION ================= -->
+
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+
+            <span class="hero-badge animate-fade-up">
+                Premium Fitness Center in Ahmedabad
+            </span>
+
+            <h1 class="animate-fade-up delay-1">
+                Best Gym in Ahmedabad for Strength & Fitness
+            </h1>
+
+            <p class="animate-fade-up delay-2">
+                Build strength, improve fitness and achieve your goals
+                with professional trainers and modern equipment.
+            </p>
+
+            <div class="hero-buttons animate-fade-up delay-3">
+
+                <a href="{% url 'membership' %}" class="btn btn-primary">
+                    View Membership Plans
+                </a>
+
+                <a href="{% url 'contact' %}" class="btn btn-secondary">
+                    Contact Us
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- ================= WHY FITZONE ================= -->
+
+<section class="section reveal">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <p class="eyebrow">
+                WHY FITZONE
+            </p>
+
+            <h2>
+                Why Choose FitZone Gym?
+            </h2>
+
+            <p>
+                Everything you need to build a stronger,
+                healthier and more active lifestyle.
+            </p>
+
+        </div>
+
+
+        <div class="features-grid">
+
+            <article class="feature-card reveal">
+
+                <div class="service-image">
+                    <img src="{% static 'images/personal-training.webp' %}"
+                        alt="Strength training workout at FitZone Gym Ahmedabad" loading="lazy">
+                </div>
+
+
+                <h3>
+                    Modern Equipment
+                </h3>
+
+                <p>
+                    Train with modern equipment designed for
+                    strength, cardio and functional workouts.
+                </p>
+
+            </article>
+
+
+            <article class="feature-card reveal">
+
+                <div class="service-image">
+                    <img src="{% static 'images/personal-training0.webp' %}"
+                        alt="Strength training workout at FitZone Gym Ahmedabad" loading="lazy">
+                </div>
+
+                <h3>
+                    Professional Trainers
+                </h3>
+
+                <p>
+                    Get guidance from trainers who can help
+                    you follow a structured fitness program.
+                </p>
+
+            </article>
+
+
+            <article class="feature-card reveal">
+
+                <div class="service-image">
+                    <img src="{% static 'images/personal-training1.webp' %}"
+                        alt="Strength training workout at FitZone Gym Ahmedabad" loading="lazy">
+                </div>
+
+                <h3>
+                    Goal-Based Training
+                </h3>
+
+                <p>
+                    Choose training programs based on your
+                    fitness, strength or weight-loss goals.
+                </p>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section class="section section-light reveal">
+
+    <div class="container two-column">
+
+        <div>
+
+            <p class="eyebrow">
+                ABOUT FITZONE
+            </p>
+
+            <h2>
+                A Modern Fitness Center in Ahmedabad
+            </h2>
+
+            <p>
+                FitZone Gym provides a comfortable training
+                environment for beginners and experienced
+                fitness enthusiasts.
+            </p>
+
+            <p>
+                Our programs include strength training,
+                personal training, weight-loss support and
+                flexible gym membership plans.
+            </p>
+
+            <a href="{% url 'about' %}" class="text-link">
+                Learn More About FitZone →
+            </a>
+
+        </div>
+
+
+        <div class="about-image">
+
+            <img src="{% static 'images/gym-interior.webp' %}"
+                alt="Modern gym interior with fitness equipment at FitZone Gym Ahmedabad" loading="lazy">
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PERSONAL TRAINING ================= -->
+
+<section class="section reveal">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <p class="eyebrow">
+                PERSONAL TRAINING
+            </p>
+
+            <h2>
+                Personal Training in Ahmedabad
+            </h2>
+
+            <p>
+                Get personalized guidance and training support
+                based on your fitness goals.
+            </p>
+
+        </div>
+
+
+        <div class="services-grid">
+
+            <article class="service-card reveal">
+
+                <div class="service-image">
+                    <img src="{% static 'images/personal-training.webp' %}"
+                        alt="Strength training workout at FitZone Gym Ahmedabad" loading="lazy">
+                </div>
+
+                <h3>
+                    Strength Training
+                </h3>
+
+                <p>
+                    Improve strength and fitness through
+                    structured resistance training.
+                </p>
+
+            </article>
+
+
+             <article class="service-card reveal">
+
+                <div class="service-image">
+                    <img src="{% static 'images/personal-training0.webp' %}"
+                        alt="Strength training workout at FitZone Gym Ahmedabad" loading="lazy">
+                </div>
+
+                <h3>
+                    Strength Training
+                </h3>
+
+                <p>
+                    Improve strength and fitness through
+                    structured resistance training.
+                </p>
+
+            </article>
+
+             <article class="service-card reveal">
+
+                <div class="service-image">
+                    <img src="{% static 'images/personal-training1.webp' %}"
+                        alt="Strength training workout at FitZone Gym Ahmedabad" loading="lazy">
+                </div>
+
+                <h3>
+                    Strength Training
+                </h3>
+
+                <p>
+                    Improve strength and fitness through
+                    structured resistance training.
+                </p>
+
+            </article>
+
+        </div>
+
+
+        <div class="section-action">
+
+            <a href="{% url 'personal-training' %}" class="btn btn-primary">
+                Explore Personal Training
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MEMBERSHIP ================= -->
+
+<section class="section membership-section reveal">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <p class="eyebrow">
+                MEMBERSHIP
+            </p>
+
+            <h2>
+                Gym Membership Plans
+            </h2>
+
+            <p>
+                Choose a membership plan that fits your
+                fitness routine.
+            </p>
+
+        </div>
+
+
+        <div class="pricing-preview">
+
+            <article class="pricing-card">
+
+                <h3>
+                    Monthly
+                </h3>
+
+                <p class="price">
+                    ₹1,500
+                    <span>/month</span>
+                </p>
+
+                <p>
+                    Flexible monthly membership.
+                </p>
+
+                <a href="{% url 'pricing' %}">
+                    View Details
+                </a>
+
+            </article>
+
+
+            <article class="pricing-card featured">
+
+                <p class="popular">
+                    POPULAR
+                </p>
+
+                <h3>
+                    Quarterly
+                </h3>
+
+                <p class="price">
+                    ₹4,000
+                    <span>/3 months</span>
+                </p>
+
+                <p>
+                    A flexible plan for consistent training.
+                </p>
+
+                <a href="{% url 'pricing' %}">
+                    View Details
+                </a>
+
+            </article>
+
+
+            <article class="pricing-card">
+
+                <h3>
+                    Annual
+                </h3>
+
+                <p class="price">
+                    ₹12,000
+                    <span>/year</span>
+                </p>
+
+                <p>
+                    Long-term fitness membership.
+                </p>
+
+                <a href="{% url 'pricing' %}">
+                    View Details
+                </a>
+
+            </article>
+
+        </div>
+
+
+        <div class="section-action">
+
+            <a href="{% url 'membership' %}" class="text-link">
+                View All Membership Options →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= WEIGHT LOSS ================= -->
+
+<section class="section reveal">
+
+    <div class="container two-column">
+
+        <div>
+
+            <p class="eyebrow">
+                WEIGHT LOSS
+            </p>
+
+            <h2>
+                Weight Loss Training in Ahmedabad
+            </h2>
+
+            <p>
+                Build a consistent fitness routine with
+                structured workouts and personal training support.
+            </p>
+
+            <a href="{% url 'weight-loss' %}" class="btn btn-primary">
+                Explore Weight Loss Training
+            </a>
+
+        </div>
+
+
+        <div class="weight-loss-image">
+
+            <img
+                src="{% static 'images/weight-loss-training.webp' %}"
+                alt="Weight loss training workout at FitZone Gym Ahmedabad"
+                loading="lazy"
+            >
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= LOCATION ================= -->
+
+<section class="section location-section reveal">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <p class="eyebrow">
+                VISIT US
+            </p>
+
+            <h2>
+                Visit FitZone Gym in Ahmedabad
+            </h2>
+
+            <p>
+                Start your fitness journey at FitZone Gym.
+            </p>
+
+        </div>
+
+
+        <div class="location-card">
+
+            <h3>
+                FitZone Gym Ahmedabad
+            </h3>
+
+            <p>
+                Ahmedabad, Gujarat, India
+            </p>
+
+            <p>
+                Monday – Sunday:
+                6:00 AM – 10:00 PM
+            </p>
+
+            <a href="{% url 'locations' %}" class="btn btn-primary">
+                View Location
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<section class="cta-section">
+
+    <div class="container">
+
+        <p class="eyebrow">
+            START TODAY
+        </p>
+
+        <h2>
+            Ready to Start Your Fitness Journey?
+        </h2>
+
+        <p>
+            Join FitZone Gym and take the next step
+            toward your fitness goals.
+        </p>
+
+        <a href="{% url 'contact' %}" class="btn btn-primary">
+            Book Your Free Trial
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

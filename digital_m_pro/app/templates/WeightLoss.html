@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}
+ {{ seo.meta_title }}
+{% endblock %}
+
+{% block meta_description %}
+{{ seo.meta_description }}
+{% endblock %}
+
+
+{% block content %}
+
+<h1>Weight Loss Training in Ahmedabad</h1>
+
+<p>
+    FitZone Gym provides structured fitness training for people
+    who want to improve their fitness and work toward their
+    weight loss goals.
+</p>
+
+<h2>Structured Workouts</h2>
+
+<p>
+    Follow a consistent workout routine based on your current
+    fitness level and goals.
+</p>
+
+<h2>Personal Training Support</h2>
+
+<p>
+    Work with a trainer for guidance and accountability.
+</p>
+
+<a href="{% url 'personal-training' %}">
+    View Personal Training
+</a>
+
+<a href="{% url 'membership' %}">
+    View Gym Membership
+</a>
+
+{% endblock %}

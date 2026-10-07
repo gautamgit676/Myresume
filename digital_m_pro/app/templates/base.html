@@ -1,0 +1,329 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    {% load static %}
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% if seo %}
+        {{ seo.meta_title }}
+        {% else %}
+        {% block title %}FitZone Gym{% endblock %}
+        {% endif %}
+    </title>
+
+    {% if seo %}
+    <meta name="description" content="{{ seo.meta_description }}">
+    {% else %}
+    {% block meta_description %}{% endblock %}
+    {% endif %}
+
+    {% if seo and seo.canonical_url %}
+    <link rel="canonical" href="{{ seo.canonical_url }}">
+    {% endif %}
+
+    {% if seo %}
+    <meta name="robots" content="{{ seo.robots }}">
+    {% endif %}
+
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+    {% if site_location %}
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "ExerciseGym",
+
+    "name": "FitZone Gym",
+
+    "description": "{{ site_location.description|escapejs }}",
+
+    "url": "{{ site_location.website_url|escapejs }}",
+
+    "telephone": "{{ site_location.phone|escapejs }}",
+
+    "image": "https://fitzone.com/static/images/gym-interior.webp",
+
+    "priceRange": "{{ site_location.price_range|escapejs }}",
+
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "{{ site_location.address|escapejs }}",
+        "addressLocality": "{{ site_location.city|escapejs }}",
+        "addressRegion": "{{ site_location.state|escapejs }}",
+        "addressCountry": "IN"
+    }
+
+    {% if site_location.latitude and site_location.longitude %}
+    ,
+    "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "{{ site_location.latitude }}",
+        "longitude": "{{ site_location.longitude }}"
+    }
+    {% endif %}
+
+    {% if site_location.facebook_url or site_location.instagram_url or site_location.linkedin_url %}
+    ,
+    "sameAs": [
+        {% if site_location.facebook_url %}
+        "{{ site_location.facebook_url|escapejs }}"
+        {% endif %}
+
+        {% if site_location.instagram_url %}
+        {% if site_location.facebook_url %},{% endif %}
+        "{{ site_location.instagram_url|escapejs }}"
+        {% endif %}
+
+        {% if site_location.linkedin_url %}
+        {% if site_location.facebook_url or site_location.instagram_url %},{% endif %}
+        "{{ site_location.linkedin_url|escapejs }}"
+        {% endif %}
+    ]
+    {% endif %}
+
+    {% if site_location.opening_time and site_location.closing_time %}
+    ,
+    "openingHoursSpecification": [
+        {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday"
+            ],
+            "opens": "{{ site_location.opening_time|time:'H:i' }}",
+            "closes": "{{ site_location.closing_time|time:'H:i' }}"
+        }
+    ]
+    {% endif %}
+
+    ,
+    "areaServed": {
+        "@type": "City",
+        "name": "{{ site_location.city|escapejs }}"
+    }
+}
+</script>
+    {% endif %}
+
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="site-header">
+
+        <div class="container header-container">
+
+            <!-- Logo -->
+            <a href="{% url 'home' %}" class="logo">
+                FitZone
+            </a>
+
+            <!-- Navigation -->
+            <!-- Navigation -->
+
+            <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+
+                <a href="{% url 'home' %}">Home</a>
+
+                <a href="{% url 'about' %}">About</a>
+
+                <a href="{% url 'membership' %}">Membership</a>
+
+                <a href="{% url 'pricing' %}">Pricing</a>
+
+                <a href="{% url 'personal-training' %}">
+                    Personal Training
+                </a>
+
+                <a href="{% url 'weight-loss' %}">
+                    Weight Loss
+                </a>
+
+                <a href="{% url 'locations' %}">Location</a>
+
+                <a href="{% url 'contact' %}" class="nav-cta">
+                    Contact
+                </a>
+
+            </nav>
+
+
+            <!-- Mobile Menu Button -->
+
+            <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"
+                aria-controls="main-navigation">
+
+                <span class="menu-icon">☰</span>
+
+            </button>
+        </div>
+
+    </header>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main>
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="site-footer">
+
+        <div class="container footer-grid">
+
+            <!-- About -->
+            <div class="footer-column">
+
+                <h2>FitZone Gym</h2>
+
+                <p>
+                    A modern fitness gym in Ahmedabad helping people
+                    achieve their strength, fitness and weight-loss goals.
+                </p>
+
+            </div>
+
+
+            <!-- Quick Links -->
+            <div class="footer-column">
+
+                <h3>Quick Links</h3>
+
+                <ul>
+
+                    <li>
+                        <a href="{% url 'about' %}">
+                            About
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'membership' %}">
+                            Membership
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'pricing' %}">
+                            Pricing
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'personal-training' %}">
+                            Personal Training
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- Services -->
+            <div class="footer-column">
+
+                <h3>Services</h3>
+
+                <ul>
+
+                    <li>
+                        <a href="{% url 'weight-loss' %}">
+                            Weight Loss
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'personal-training' %}">
+                            Personal Training
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'membership' %}">
+                            Gym Membership
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- Contact -->
+            <div class="footer-column">
+
+                <h3>Contact</h3>
+
+                <address>
+
+                    <p>
+                        Ahmedabad, Gujarat, India
+                    </p>
+
+                    <p>
+                        Phone:
+                        <a href="tel:+919000000000">
+                            +91 90000 00000
+                        </a>
+                    </p>
+
+                    <p>
+                        Email:
+                        <a href="mailto:hello@fitzone.example">
+                            hello@fitzone.example
+                        </a>
+                    </p>
+
+                </address>
+
+            </div>
+
+        </div>
+
+
+        <!-- Copyright -->
+
+        <div class="footer-bottom">
+
+            <div class="container">
+
+                <p>
+                    © 2026 FitZone Gym Ahmedabad.
+                    All rights reserved.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- JavaScript -->
+    <script src="{% static 'js/main.js' %}" defer></script>
+
+</body>
+
+</html>

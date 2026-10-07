@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}
+ {{ seo.meta_title }}
+{% endblock %}
+
+{% block meta_description %}
+{{ seo.meta_description }}
+{% endblock %}
+
+
+{% block content %}
+
+<h1>Gym Membership in Ahmedabad</h1>
+
+<p>
+    Choose a FitZone Gym membership plan that matches your
+    fitness goals and workout schedule.
+</p>
+
+<h2>Monthly Membership</h2>
+
+<p>
+    Flexible monthly membership for members who prefer
+    shorter commitments.
+</p>
+
+<h2>Quarterly Membership</h2>
+
+<p>
+    A three-month membership option for consistent training.
+</p>
+
+<h2>Annual Membership</h2>
+
+<p>
+    A long-term membership option for members who want
+    to maintain a regular fitness routine.
+</p>
+
+<a href="{% url 'pricing' %}">
+    View Gym Membership Fees
+</a>
+
+{% endblock %}

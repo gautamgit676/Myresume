@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}
+ {{ seo.meta_title }}
+{% endblock %}
+
+{% block meta_description %}
+{{ seo.meta_description }}
+{% endblock %}
+
+
+{% block content %}
+
+<h1>Personal Training in Ahmedabad</h1>
+
+<p>
+    FitZone personal training provides structured guidance
+    designed around your fitness goals and workout level.
+</p>
+
+<h2>Personalized Workout Plans</h2>
+
+<p>
+    Our trainers can help you follow a structured workout
+    routine based on your fitness goals.
+</p>
+
+<h2>Strength Training</h2>
+
+<p>
+    Learn proper exercise techniques and build a consistent
+    strength training routine.
+</p>
+
+<h2>Weight Loss Support</h2>
+
+<p>
+    If your goal is weight loss, explore our
+    <a href="{% url 'weight-loss' %}">
+        weight loss training
+    </a>
+    options.
+</p>
+
+<a href="{% url 'pricing' %}">
+    View Training Pricing
+</a>
+
+{% endblock %}
