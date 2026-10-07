@@ -8,7 +8,7 @@ def robots_txt(request):
     content = """User-agent: *
     Disallow: /admin/
 
-    Sitemap: http://127.0.0.1:8000/sitemap.xml
+    Sitemap: https://gautamsinh.duckdns.org/sitemap.xml
     """
 
     return HttpResponse(
@@ -78,7 +78,7 @@ def pricing(request):
 def weightloss(request):
     seo = get_seo("/weight-loss/")
     location = get_location()
-    return render(request,'Weightloss.html', {"seo": seo, "location": location})
+    return render(request,'WeightLoss.html', {"seo": seo, "location": location})
 
 
 

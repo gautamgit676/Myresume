@@ -11,9 +11,9 @@ urlpatterns = [
     path('contact/', contact, name='contact'),
     path('membership/', membership, name='membership'),
     path('personal-training/', personal_training, name='personal-training'),
-    path('gym-fees-ahmedabad/', pricing, name='gym-fees-ahmedabad'),
+    path('gym-fees-ahmedabad/', pricing, name='pricing'),
     path('weight-loss/', weightloss, name='weight-loss'),
-    path('pricing/', pricing, name='pricing'),
+
     path("robots.txt", robots_txt, name="robots_txt"),
 
     # Locations
