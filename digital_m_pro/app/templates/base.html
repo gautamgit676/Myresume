@@ -5,6 +5,7 @@
 
 <head>
 
+
     {% load static %}
 
     <meta charset="UTF-8">
@@ -18,6 +19,17 @@
         {% block title %}FitZone Gym{% endblock %}
         {% endif %}
     </title>
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8ME6NF68FL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-8ME6NF68FL');
+    </script>
 
     {% if seo %}
     <meta name="description" content="{{ seo.meta_description }}">
