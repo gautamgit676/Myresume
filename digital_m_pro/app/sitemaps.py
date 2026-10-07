@@ -12,7 +12,7 @@ class StaticViewSitemap(Sitemap):
             "home",
             "about",
             "membership",
-            "gym-fees-ahmedabad",
+            "pricing",
             "personal-training",
             "weight-loss",
             "locations",
