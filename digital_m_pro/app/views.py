@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import render
 from app.models import *
 
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 # # Create your views here.
 def robots_txt(request):
@@ -40,11 +41,31 @@ def about(request):
     location = get_location()
     return render(request,'About.html', {"seo": seo, "location": location})
 
+# def contact(request):
+#     seo = get_seo("/contact/")
+#     location = get_location()
+#     print(seo.meta_title,'-=-=-=-=-')
+#     return render(request,'Contact.html', {"seo": seo, "location": location})
+
+def contact_success(request):
+    return render(request, "contact_success.html")
+
 def contact(request):
     seo = get_seo("/contact/")
     location = get_location()
-    print(seo.meta_title,'-=-=-=-=-')
-    return render(request,'Contact.html', {"seo": seo, "location": location})
+    if request.method == "POST":
+
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        phone = request.POST.get("phone")
+        message = request.POST.get("message")
+
+        # Save/send the lead here
+
+        return redirect("contact-success")
+
+    return render(request, "Contact.html", {"seo": seo, "location": location})
+
 
 def blog(request):
     seo = get_seo("/blog/")

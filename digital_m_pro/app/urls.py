@@ -13,6 +13,7 @@ urlpatterns = [
     path('personal-training/', personal_training, name='personal-training'),
     path('gym-fees-ahmedabad/', pricing, name='pricing'),
     path('weight-loss/', weightloss, name='weight-loss'),
+    path("contact-success/",contact_success,name="contact-success"),
 
     path("robots.txt", robots_txt, name="robots_txt"),
 
