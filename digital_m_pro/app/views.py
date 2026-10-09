@@ -7,15 +7,11 @@ from django.http import HttpResponse
 # # Create your views here.
 def robots_txt(request):
     content = """User-agent: *
-    Disallow: /admin/
+Disallow: /admin/
 
-    Sitemap: https://gautamsinh.duckdns.org/sitemap.xml
-    """
-
-    return HttpResponse(
-        content,
-        content_type="text/plain"
-    )
+Sitemap: https://gautamsinh.duckdns.org/sitemap.xml
+"""
+    return HttpResponse(content, content_type="text/plain")
 
 def get_seo(page_path):
     return SEOPage.objects.filter(
