@@ -103,3 +103,64 @@ class SEOPage(models.Model):
 
     def __str__(self):
         return self.page_name
+    
+
+
+
+
+from django.db import models
+from django.urls import reverse
+
+
+class Product(models.Model):
+    CATEGORY_CHOICES = [
+        ("dumbbells", "Dumbbells"),
+        ("bands", "Resistance Bands"),
+        ("clothing", "Gym Clothing"),
+        ("yoga", "Yoga Mats"),
+    ]
+
+    AVAILABILITY_CHOICES = [
+        ("in_stock", "In stock"),
+        ("out_of_stock", "Out of stock"),
+    ]
+
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=220, unique=True)
+
+    category = models.CharField(
+        max_length=30,
+        choices=CATEGORY_CHOICES,
+    )
+
+    description = models.TextField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    # Filename relative to app/static/app/images/products/
+    image_filename = models.CharField(max_length=255)
+
+    availability = models.CharField(
+        max_length=20,
+        choices=AVAILABILITY_CHOICES,
+        default="in_stock",
+    )
+
+    seo_title = models.CharField(max_length=70, blank=True)
+    meta_description = models.CharField(max_length=160, blank=True)
+
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    image = models.ImageField(upload_to="products/", blank=True)
+
+    class Meta:
+        ordering = ["name"]
+
+    def __str__(self):
+        return self.name
+
+    def get_image_path(self):
+        return f"app/images/products/{self.image_filename}"
+
+    def get_absolute_url(self):
+        return reverse("product_detail", kwargs={"slug": self.slug})

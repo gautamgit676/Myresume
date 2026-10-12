@@ -17,7 +17,9 @@ class StaticViewSitemap(Sitemap):
             "weight-loss",
             "locations",
             "contact",
-            "blog"
+            "blog",
+            "shop",
+            "product_detail"
         ]
 
     def location(self, item):

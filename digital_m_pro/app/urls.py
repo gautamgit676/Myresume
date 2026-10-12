@@ -22,5 +22,8 @@ urlpatterns = [
 
     # Blog
     path('blog/', blog, name='blog'),
-    # path('location/ahmedabad/', locat/ion , name='location_ahmedabad'),
+    # path('location/ahmedabad/', location , name='location_ahmedabad'),
+
+    path('shop/', gym_equipment, name='shop'),
+    path("shop/<slug:slug>/", product_detail, name="product_detail"),
 ]

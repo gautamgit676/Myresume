@@ -1,0 +1,245 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ seo.meta_title|default:"Fitness Equipment & Gym Accessories | FitZone" }}{% endblock %}
+
+
+
+
+ {% if seo %}
+    <meta name="description" content="{{ seo.meta_description }}">
+    {% else %}
+    {% block meta_description %}{% endblock %}
+    {% endif %}
+
+
+{% block content %}
+
+<main class="shop-page">
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <p class="eyebrow">Train better. Move stronger.</p>
+
+            <h1>Fitness Equipment &amp; Gym Accessories</h1>
+
+            <p>
+                Explore equipment for strength training, home workouts,
+                stretching and everyday fitness. Find dumbbells,
+                resistance bands, gym clothing and yoga mats.
+            </p>
+
+            <a href="#products" class="hero-button">
+                Explore Products
+            </a>
+        </div>
+    </section>
+
+    <!-- Breadcrumbs -->
+    <div class="container breadcrumbs">
+        <a href="/">Home</a>
+        &rsaquo;
+        <span aria-current="page">Shop</span>
+    </div>
+
+    <!-- Product Listing -->
+    <section class="shop-section container" id="products">
+
+        <div class="section-heading">
+            <h2>Shop All Products</h2>
+
+            <p>
+                Browse our fitness equipment and workout accessories.
+            </p>
+
+            <span class="demo-note">
+                Portfolio demo: all prices and availability are illustrative.
+            </span>
+        </div>
+
+        <!-- Search and Category Filters -->
+        <div class="shop-controls">
+
+            <label for="product-search"
+                   style="position:absolute;left:-9999px;">
+                Search products
+            </label>
+
+            <input
+                type="search"
+                id="product-search"
+                class="search-input"
+                placeholder="Search products..."
+                autocomplete="off"
+            >
+
+            <button
+                class="filter-button active"
+                type="button"
+                data-filter="all"
+                aria-pressed="true">
+                All Products
+            </button>
+
+            <button
+                class="filter-button"
+                type="button"
+                data-filter="dumbbells"
+                aria-pressed="false">
+                Dumbbells
+            </button>
+
+            <button
+                class="filter-button"
+                type="button"
+                data-filter="bands"
+                aria-pressed="false">
+                Resistance Bands
+            </button>
+
+            <button
+                class="filter-button"
+                type="button"
+                data-filter="clothing"
+                aria-pressed="false">
+                Gym Clothing
+            </button>
+
+            <button
+                class="filter-button"
+                type="button"
+                data-filter="yoga"
+                aria-pressed="false">
+                Yoga Mats
+            </button>
+
+        </div>
+
+        <!-- Products -->
+        <div class="product-grid">
+
+            {% for product in products %}
+
+            <article
+                class="product-card"
+                data-category="{{ product.category }}"
+                data-name="{{ product.name|lower }}">
+
+                <!-- Product Image -->
+                {% if product.image %}
+                    <img
+                        class="product-image"
+                        src="{{ product.image.url }}"
+                        alt="{{ product.name }}"
+                        width="350"
+                        height="350"
+                        loading="lazy"
+                    >
+                {% else %}
+                    <div class="image-placeholder">
+                        Product image not added yet.
+                    </div>
+                {% endif %}
+
+                <!-- Product Information -->
+                <div class="product-info">
+
+                    <p class="category-label">
+                        {{ product.get_category_display }}
+                    </p>
+
+                    <h3>
+                        <a href="{{ product.get_absolute_url }}">
+                            {{ product.name }}
+                        </a>
+                    </h3>
+
+                    <p class="product-description">
+                        {{ product.description }}
+                    </p>
+
+                    <p class="product-price">
+                        ₹{{ product.price }}
+                    </p>
+
+                    <p class="demo-price">
+                        Illustrative portfolio price
+                    </p>
+
+                    {% if product.availability == "in_stock" %}
+                        <span class="availability">
+                            Demo availability: In stock
+                        </span>
+                    {% else %}
+                        <span class="availability">
+                            Demo availability: Out of stock
+                        </span>
+                    {% endif %}
+
+                    <a
+                        class="product-link"
+                        href="{{ product.get_absolute_url }}">
+                        View Product
+                    </a>
+
+                </div>
+            </article>
+
+            {% empty %}
+
+            <p class="empty-products">
+                No products are available yet. Add demo products through
+                Django Admin.
+            </p>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- Search Result Message -->
+        <p id="no-results" class="no-results" hidden>
+            No matching products found. Try another search.
+        </p>
+
+    </section>
+
+    <!-- SEO Content -->
+    <section class="seo-content">
+        <div class="container">
+
+            <h2>Explore Fitness Equipment for Your Workouts</h2>
+
+            <p>
+                Choosing suitable fitness equipment can help you organise
+                strength training, flexibility exercises and home workouts.
+                Dumbbells are useful for resistance exercises, while
+                resistance bands offer another option for strength and
+                mobility routines.
+            </p>
+
+            <p>
+                Workout clothing can support comfortable movement, and a
+                yoga mat provides a dedicated surface for stretching, yoga
+                and floor exercises. Consider your space, fitness goals
+                and equipment requirements before choosing a product.
+            </p>
+
+            <p>
+                Looking for gym training as well? Explore our
+                <a href="/membership/">
+                    <strong>gym membership options</strong>
+                </a>
+                or learn more about
+                <a href="/personal-training/">
+                    <strong>personal training</strong>
+                </a>.
+            </p>
+
+        </div>
+    </section>
+
+</main>
+
+{% endblock %}

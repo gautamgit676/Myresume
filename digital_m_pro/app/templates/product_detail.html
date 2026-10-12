@@ -1,0 +1,91 @@
+
+{% extends "base.html" %}
+
+<!-- {% load static %} -->
+
+
+{% block title %}
+    {{ product.seo_title|default:product.name }}
+{% endblock %}
+
+
+
+
+
+
+
+{% block content %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "{{ product.name|escapejs }}",
+  "description": "{{ product.description|striptags|escapejs }}",
+  "image": [
+    "https://gautamsinh.duckdns.org{{ product.image.url }}"
+  ],
+  "url": "https://gautamsinh.duckdns.org{{ product.get_absolute_url }}",
+  "brand": {
+    "@type": "Brand",
+    "name": "FitZone"
+  }
+}
+</script>
+
+
+<main class="product-detail-page">
+    <nav class="product-breadcrumbs container" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">›</span>
+        <a href="/shop/">Shop</a>
+        <span aria-hidden="true">›</span>
+        <span aria-current="page">{{ product.name }}</span>
+    </nav>
+
+    <section class="product-detail container">
+        <div class="product-detail-image-wrap">
+            {% if product.image %}
+            <img class="product-detail-image" src="{{ product.image.url }}" alt="{{ product.name }}" width="600"
+                height="600" fetchpriority="high">
+            {% else %}
+            <div class="product-image-placeholder">
+                Product image coming soon
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="product-detail-info">
+            <p class="product-detail-eyebrow">FITZONE FITNESS</p>
+
+            <h1>{{ product.name }}</h1>
+
+            <p class="product-detail-description">
+                {{ product.description }}
+            </p>
+
+            <p class="product-detail-price">
+                ₹{{ product.price }}
+            </p>
+
+            <p class="product-demo-note">
+                Portfolio demonstration: sample price and stock information.
+            </p>
+
+            <p class="product-stock">
+                <span class="stock-dot" aria-hidden="true"></span>
+                {% if product.availability == "in_stock" %}
+                Demo availability: In stock
+                {% else %}
+                Demo availability: Out of stock
+                {% endif %}
+            </p>
+
+            <a href="/shop/" class="product-back-link">
+                <span aria-hidden="true">←</span> Explore all products
+            </a>
+        </div>
+    </section>
+</main>
+{% endblock %}
+

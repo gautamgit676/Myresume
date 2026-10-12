@@ -4,6 +4,8 @@ from app.models import *
 
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+
+
 # # Create your views here.
 def robots_txt(request):
     content = """User-agent: *
@@ -98,5 +100,59 @@ def weightloss(request):
     return render(request,'WeightLoss.html', {"seo": seo, "location": location})
 
 
+# def gym_equipment(request):
+#     seo = get_seo("/shop/")
+#     location = get_location()
+#     return render(request,'GymEquipment.html', {"seo": seo, "location": location})
 
 
+
+
+def gym_equipment(request):
+    seo = get_seo("/shop/")
+    location = get_location()
+    products = Product.objects.filter(is_active=True)
+
+    category = request.GET.get("category", "").strip()
+    search_query = request.GET.get("q", "").strip()
+
+    valid_categories = {
+        choice[0] for choice in Product.CATEGORY_CHOICES
+    }
+
+    if category in valid_categories:
+        products = products.filter(category=category)
+
+    if search_query:
+        products = products.filter(
+            models.Q(name__icontains=search_query)
+            | models.Q(description__icontains=search_query)
+        )
+
+    context = {
+        "products": products,
+        "categories": Product.CATEGORY_CHOICES,
+        "selected_category": category,
+        "search_query": search_query,
+    }
+
+    return render(request, "GymEquipment.html", {"seo": seo, "location": location, **context})
+
+
+
+
+from django.shortcuts import get_object_or_404
+
+
+def product_detail(request, slug):
+    product = get_object_or_404(
+        Product,
+        slug=slug,
+        is_active=True,
+    )
+
+    return render(
+        request,
+        "product_detail.html",
+        {"product": product},
+    )

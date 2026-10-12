@@ -111,7 +111,9 @@ AUTH_PASSWORD_VALIDATORS = [
 import os
 # only keys and name add in server also make .env also on server
 # this is for devlopment check not for actual server //  you need to made on server .env and all thigs ned to add keys
+
 """
+
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
@@ -121,10 +123,12 @@ AWS_S3_FILE_OVERWRITE = False
 AWS_QUERYSTRING_AUTH = False
 AWS_DEFAULT_ACL = None
 AWS_S3_VERIFY = True
+
 """
 
 # this is for s3 buket and all got fron gpt paste and check
 """
+
 STORAGES = {
     "default": {
         "BACKEND": "storages.backends.s3.S3Storage",

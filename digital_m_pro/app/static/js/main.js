@@ -162,3 +162,65 @@ document.addEventListener("DOMContentLoaded", function () {
         revealObserver.observe(element);
 
     });
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("product-search");
+    const filterButtons = document.querySelectorAll(".filter-button");
+    const productCards = document.querySelectorAll(".product-card");
+    const noResults = document.getElementById("no-results");
+
+    if (!searchInput || !noResults) return;
+
+    let activeCategory = "all";
+
+    function filterProducts() {
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        let visibleCount = 0;
+
+        productCards.forEach((card) => {
+            const category = card.dataset.category;
+            const searchableText = card.textContent.toLowerCase();
+
+            const matchesCategory =
+                activeCategory === "all" || category === activeCategory;
+
+            const matchesSearch = searchableText.includes(searchTerm);
+            const isVisible = matchesCategory && matchesSearch;
+
+            card.hidden = !isVisible;
+
+            if (isVisible) visibleCount++;
+        });
+
+        noResults.hidden = visibleCount !== 0;
+    }
+
+    filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            activeCategory = button.dataset.filter;
+
+            filterButtons.forEach((item) => {
+                const active = item === button;
+                item.classList.toggle("active", active);
+                item.setAttribute("aria-pressed", String(active));
+            });
+
+            filterProducts();
+        });
+    });
+
+    searchInput.addEventListener("input", filterProducts);
+    filterProducts();
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const productPage = document.querySelector(".product-detail-page");
+
+    if (!productPage) return;
+
+    productPage.classList.add("product-detail-ready");
+});
